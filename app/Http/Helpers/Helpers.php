@@ -3,24 +3,26 @@
 use App\Models\SiteLanguage;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Gate;
-use Intervention\Image\ImageManagerStatic as Image;
+use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\Response;
-use Spatie\Permission\Models\Permission;
-
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Artisan;
 
 if (!function_exists('upload')) {
     function upload($path, $file)
     {
+        if (!File::isDirectory(public_path('images/' . $path))) {
+            File::makeDirectory(public_path('images/' . $path), 0777, true, true);
+        }
         try {
             $filename = uniqid() . '.webp';
             Image::make($file)->resize(null, 800, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->encode('webp', 75)->save(public_path('images/' . $path . '/' . $filename), 60);
-            $data['photo'] = 'images/' . $path . '/' . $filename;
-            return $data['photo'];
+            return 'images/' . $path . '/' . $filename;
         } catch (Exception $e) {
-            return redirect()->back();
+            return $e->getMessage();
         }
     }
 }
@@ -50,6 +52,47 @@ if (!function_exists('check_permission')) {
     {
         return abort_if(Gate::denies($permission_name), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+    }
+}
+
+if (!function_exists('creation')) {
+    function creation($name, $modelName = null,$translateModel = false)
+    {
+        Artisan::call('make:controller Backend/' . $name.'Controller --resource');
+        Artisan::call('make:controller Api/' . $name.'Controller');
+        if ($modelName != null) {
+            Artisan::call('make:model ' . $modelName . ' -m');
+        }
+        if ($translateModel) {
+            Artisan::call('make:model ' . $modelName . 'Translation -m');
+        }
+        add_permission(Str::lower($name));
+        Artisan::call('app:create-blade '.Str::lower($name));
+        Artisan::call('translation:add '.Str::lower($name));
+    }
+}
+
+if (!function_exists('admin_delete')) {
+    function admin_delete($route, $id)
+    {
+        return '<a class="btn btn-danger" href="' . route($route, ['id' => $id]) . '"><i class="fas fa-trash"></i></a>';
+    }
+}
+
+if (!function_exists('admin_edit')) {
+    function admin_edit($route, $parameter1, $parameter2)
+    {
+        return '<a class="btn btn-primary" href="' . route($route, [$parameter1 => $parameter2]) . '"><i class="fas fa-edit"></i></a>';
+    }
+}
+
+if (!function_exists('admin_status')) {
+    function admin_status($route, $value)
+    {
+        $isChecked = ($value->status == 1) ? 'checked' : '';
+        return '<a href="' . route($route, ['id' => $value->id]) . '" >
+        <input ' . $isChecked . ' type="checkbox" id="switch" switch="primary" />
+                <label for="switch4"></label></a>';
     }
 }
 
@@ -91,7 +134,6 @@ if (!function_exists('validation_response')) {
         return '<div class="valid-feedback">' . __($name) . ' ' . __('messages.is-correct') . '</div><div class="invalid-feedback">' . __($name) . ' ' . __('messages.not-correct') . '</div>';
     }
 }
-
 
 if (!function_exists('convert_number')) {
     function convert_number($value)

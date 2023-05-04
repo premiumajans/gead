@@ -1,8 +1,7 @@
-<?php
-
-return array (
+<?php return array (
   'copyright' => 'Copyright',
   'name' => 'Name',
   'products' => 'Products',
   'surname' => 'Surname',
+  'etibar' => '',
 );

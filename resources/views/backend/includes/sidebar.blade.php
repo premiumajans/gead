@@ -45,15 +45,21 @@
                         <span>@lang('backend.create-order')</span>
                     </a>
                 </li>
-
                 <li>
                     <a href="{{ route('backend.contact-us.index') }}" class="waves-effect">
                         <i class="ri-contacts-fill"></i>
                         <span>@lang('backend.contact-us')</span>
                     </a>
                 </li>
-
-
+{{--                {{ creation('Etibar',false) }}--}}
+                @can('news index')
+                    <li>
+                        <a href="{{ route('backend.news.index') }}" class="waves-effect">
+                            <i class="fas fa-newspaper"></i>
+                            <span>@lang('backend.news')</span>
+                        </a>
+                    </li>
+                @endcan
                 @can('usefulLink index')
                     <li>
                         <a href="{{ route('backend.useful-links.index') }}" class="waves-effect">

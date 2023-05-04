@@ -197,6 +197,11 @@
     color: #6c757d
 }
 
+.edit-image {
+    width: 100%;
+    max-height: 600px;
+}
+
 .dropdown-icon-item img {
     height: 24px
 }
@@ -1878,7 +1883,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .container-fluid, body[data
     margin-top: 16px
 }
 
-.login-button{
+.login-button {
     background-color: #252b3b;
     color: white;
 }
@@ -2213,8 +2218,10 @@ body[data-layout=horizontal][data-layout-size=boxed] .container-fluid, body[data
     .fc .fc-toolbar {
         display: block
     }
+
     .navbar-brand-box {
-        background-color: #252b3b; !important;
+        background-color: #252b3b;
+    !important;
     }
 }
 

@@ -64,6 +64,9 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
     Route::get('/post/{id}/change-status', [BPost::class, 'postStatus'])->name('postStatus');
     Route::get('/products/{id}/change-status', [ProductController::class, 'status'])->name('statusProduct');
     Route::get('/services/{id}/change-status', [\App\Http\Controllers\Backend\ServiceController::class, 'status'])->name('statusService');
+    Route::get('/useful-link/{id}/change-status', [\App\Http\Controllers\Backend\UsefulLinkController::class, 'status'])->name('statusLink');
+    Route::get('/news/{id}/change-status', [\App\Http\Controllers\Backend\UsefulLinkController::class, 'status'])->name('statusNews');
+
 //Delete
     Route::get('/site-languages/{id}/delete', [BSiteLan::class, 'delSiteLang'])->name('delSiteLang');
     Route::get('/categories/{id}/delete', [BCategory::class, 'delCategory'])->name('delCategory');
@@ -80,6 +83,9 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
     Route::get('/newsletter/{id}/delete', [BNewsletter::class, 'delNewsletter'])->name('delNewsletter');
     Route::get('/products/{id}/delete', [ProductController::class, 'delete'])->name('delProduct');
     Route::get('/services/{id}/delete', [\App\Http\Controllers\Backend\ServiceController::class, 'delete'])->name('delService');
+    Route::get('/useful-links/{id}/delete', [\App\Http\Controllers\Backend\UsefulLinkController::class, 'delete'])->name('delLinks');
+    Route::get('/news/{id}/delete', [\App\Http\Controllers\Backend\NewsController::class, 'delete'])->name('delNews');
+
 //Resources
     Route::resource('/categories', BCategory::class);
     Route::resource('/site-languages', BSiteLan::class);
@@ -97,4 +103,6 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
     Route::resource('/products', ProductController::class);
     Route::resource('/services', \App\Http\Controllers\Backend\ServiceController::class);
     Route::resource('/useful-links', \App\Http\Controllers\Backend\UsefulLinkController::class);
+    Route::resource('/news', \App\Http\Controllers\Backend\NewsController::class);
 });
+

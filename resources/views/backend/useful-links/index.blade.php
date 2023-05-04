@@ -42,24 +42,16 @@
                             @foreach($links as $link)
                                 <tr>
                                     <td class="text-center">{{ $link->id }}</td>
-                                    <td class="text-center"><img src="{{ asset($link->photo) }}" height="50px" width="100px"></td>
+                                    <td class="text-center"><img src="{{ asset($link->photo) }}" height="50px"
+                                                                 width="100px"></td>
                                     <td class="text-center">{{ $link->link }}</td>
                                     <td>{{ date('d.m.Y H:i:s',strtotime($link->created_at))}}</td>
                                     <td class="text-center">
-                                        {{--                                    <a href="{{ route('backend.useful-linkstatus',['id'=>$link->id]) }}" title="@lang('backend.status')">--}}
-                                        {{--                                        <input type="checkbox" id="switch" switch="primary" {{ $link->status == 1 ? 'checked' : '' }} />--}}
-                                        {{--                                        <label for="switch4"></label>--}}
-                                        {{--                                    </a>--}}
+                                        {!! admin_status('backend.statusLink',$link) !!}
                                     </td>
                                     <td class="text-center">
-                                        <a class="btn btn-primary"
-                                           href={{ route('backend.useful-links.edit',['useful_link'=>$link->id]) }}>
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a class="btn btn-danger"
-                                           href="{{ route('backend.delSetting',['id'=>$link->id]) }}">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
+                                        {!! admin_edit('backend.useful-links.edit','useful_link',$link->id) !!}
+                                        {!! admin_delete('backend.delLinks',$link->id) !!}
                                     </td>
                                 </tr>
                             @endforeach
