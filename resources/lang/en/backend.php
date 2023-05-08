@@ -3,5 +3,7 @@
   'name' => 'Name',
   'products' => 'Products',
   'surname' => 'Surname',
-  'etibar' => '',
+  'content' => '',
+  'sub-categories' => '',
+  'gallery' => '',
 );

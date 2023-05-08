@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\UsefulLink;
+use App\Models\UseFulLink;
 use Illuminate\Http\Request;
 
 class UsefulLinkController extends Controller
 {
     public function index()
     {
-        $categories = UsefulLink::where('status', 1)->get();
-        return response()->json($categories);
+        $links = UseFulLink::where('status', 1)->get();
+        return response()->json($links);
     }
 
     public function show($id)
     {
-        $category = UsefulLink::where('id', $id)->where('status', 1)->get();
+        $category = UseFulLink::where('id', $id)->where('status', 1)->get();
         return response()->json($category);
     }
 }

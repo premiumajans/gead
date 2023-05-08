@@ -14,9 +14,9 @@ class SettingsController extends Controller
         return response()->json($settings);
     }
 
-    public function show($id)
+    public function show($name)
     {
-        $setting = Setting::where('id', $id)->where('status', 1)->get();
+        $setting = Setting::where('name', $name)->where('status', 1)->first();
         return response()->json($setting);
     }
 }

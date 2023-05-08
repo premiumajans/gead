@@ -54,55 +54,77 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
     Route::get('/service/component/{id}/delete', [\App\Http\Controllers\Backend\ServiceController::class, 'componentDelete'])->name('deleteComponent');
     Route::get('orders', [BOrder::class, 'index'])->name('orders');
     Route::get('order/{id}', [BOrder::class, 'read'])->name('orderRead');
+    Route::post('change-category', [\App\Http\Controllers\Backend\ContentController::class, 'changeCategory'])->name('changeCategory');
+    Route::post('change-alt-category', [\App\Http\Controllers\Backend\ContentController::class, 'changeAltCategory'])->name('changeAltCategory');
+
 
 //Statuses
-    Route::get('/site-language/{id}/change-status', [BSiteLan::class, 'siteLanStatus'])->name('siteLanStatus');
-    Route::get('/categories/{id}/change-status', [BCategory::class, 'categoryStatus'])->name('categoryStatus');
-    Route::get('/settings/{id}/change-status', [BSetting::class, 'settingStatus'])->name('settingStatus');
-    Route::get('/seo/{id}/change-status', [BMeta::class, 'seoStatus'])->name('seoStatus');
-    Route::get('/slider/{id}/change-status', [BSlider::class, 'sliderStatus'])->name('sliderStatus');
-    Route::get('/post/{id}/change-status', [BPost::class, 'postStatus'])->name('postStatus');
-    Route::get('/products/{id}/change-status', [ProductController::class, 'status'])->name('statusProduct');
-    Route::get('/services/{id}/change-status', [\App\Http\Controllers\Backend\ServiceController::class, 'status'])->name('statusService');
-    Route::get('/useful-link/{id}/change-status', [\App\Http\Controllers\Backend\UsefulLinkController::class, 'status'])->name('statusLink');
-    Route::get('/news/{id}/change-status', [\App\Http\Controllers\Backend\UsefulLinkController::class, 'status'])->name('statusNews');
+    Route::group(['name' => 'status'], function () {
+Route::get('gallery/{id}/change-status',[App\Http\Controllers\Backend\GalleryController::class,'status'])->name('galleryStatus');
+
+        Route::get('about/{id}/change-status', [App\Http\Controllers\Backend\AboutController::class, 'status'])->name('aboutStatus');
+        Route::get('content/{id}/change-status', [App\Http\Controllers\Backend\ContentController::class, 'status'])->name('contentStatus');
+        Route::get('/site-language/{id}/change-status', [BSiteLan::class, 'siteLanStatus'])->name('siteLanStatus');
+        Route::get('/categories/{id}/change-status', [BCategory::class, 'categoryStatus'])->name('categoryStatus');
+        Route::get('/settings/{id}/change-status', [BSetting::class, 'settingStatus'])->name('settingStatus');
+        Route::get('/seo/{id}/change-status', [BMeta::class, 'seoStatus'])->name('seoStatus');
+        Route::get('/slider/{id}/change-status', [BSlider::class, 'sliderStatus'])->name('sliderStatus');
+        Route::get('/post/{id}/change-status', [BPost::class, 'postStatus'])->name('postStatus');
+        Route::get('/products/{id}/change-status', [ProductController::class, 'status'])->name('statusProduct');
+        Route::get('/services/{id}/change-status', [\App\Http\Controllers\Backend\ServiceController::class, 'status'])->name('statusService');
+        Route::get('/useful-link/{id}/change-status', [\App\Http\Controllers\Backend\UseFulLinkController::class, 'status'])->name('statusLink');
+        Route::get('/news/{id}/change-status', [\App\Http\Controllers\Backend\UseFulLinkController::class, 'status'])->name('statusNews');
+    });
+
 
 //Delete
-    Route::get('/site-languages/{id}/delete', [BSiteLan::class, 'delSiteLang'])->name('delSiteLang');
-    Route::get('/categories/{id}/delete', [BCategory::class, 'delCategory'])->name('delCategory');
-    Route::get('/contact-us/{id}/delete', [BContact::class, 'delContactUS'])->name('delContactUS');
-    Route::get('/order/{id}/delete', [BOrder::class, 'delete'])->name('delOrder');
-    Route::get('/settings/{id}/delete', [BSetting::class, 'delSetting'])->name('delSetting');
-    Route::get('/users/{id}/delete', [BAdmin::class, 'delAdmin'])->name('delAdmin');
-    Route::get('/seo/{id}/delete', [BMeta::class, 'delSeo'])->name('delSeo');
-    Route::get('/slider/{id}/delete', [BSlider::class, 'delSlider'])->name('delSlider');
-    Route::get('/report/{id}/delete', [BReport::class, 'delReport'])->name('delReport');
-    Route::get('/report/clean-all', [BReport::class, 'cleanAllReport'])->name('cleanAllReport');
-    Route::get('/permission/{id}/delete', [BPermission::class, 'delPermission'])->name('delPermission');
-    Route::get('/post/{id}/delete', [BPost::class, 'delPost'])->name('delPost');
-    Route::get('/newsletter/{id}/delete', [BNewsletter::class, 'delNewsletter'])->name('delNewsletter');
-    Route::get('/products/{id}/delete', [ProductController::class, 'delete'])->name('delProduct');
-    Route::get('/services/{id}/delete', [\App\Http\Controllers\Backend\ServiceController::class, 'delete'])->name('delService');
-    Route::get('/useful-links/{id}/delete', [\App\Http\Controllers\Backend\UsefulLinkController::class, 'delete'])->name('delLinks');
-    Route::get('/news/{id}/delete', [\App\Http\Controllers\Backend\NewsController::class, 'delete'])->name('delNews');
+    Route::group(['name' => 'delete'], function () {
+Route::get('gallery/{id}/delete',[App\Http\Controllers\Backend\GalleryController::class,'delete'])->name('galleryDelete');
+
+        Route::get('about/{id}/delete', [App\Http\Controllers\Backend\AboutController::class, 'delete'])->name('aboutDelete');
+
+        Route::get('content/{id}/delete', [App\Http\Controllers\Backend\ContentController::class, 'delete'])->name('contentDelete');
+        Route::get('/site-languages/{id}/delete', [BSiteLan::class, 'delSiteLang'])->name('delSiteLang');
+        Route::get('/categories/{id}/delete', [BCategory::class, 'delCategory'])->name('delCategory');
+        Route::get('/contact-us/{id}/delete', [BContact::class, 'delContactUS'])->name('delContactUS');
+        Route::get('/order/{id}/delete', [BOrder::class, 'delete'])->name('delOrder');
+        Route::get('/settings/{id}/delete', [BSetting::class, 'delSetting'])->name('delSetting');
+        Route::get('/users/{id}/delete', [BAdmin::class, 'delAdmin'])->name('delAdmin');
+        Route::get('/seo/{id}/delete', [BMeta::class, 'delSeo'])->name('delSeo');
+        Route::get('/slider/{id}/delete', [BSlider::class, 'delSlider'])->name('delSlider');
+        Route::get('/report/{id}/delete', [BReport::class, 'delReport'])->name('delReport');
+        Route::get('/report/clean-all', [BReport::class, 'cleanAllReport'])->name('cleanAllReport');
+        Route::get('/permission/{id}/delete', [BPermission::class, 'delPermission'])->name('delPermission');
+        Route::get('/post/{id}/delete', [BPost::class, 'delPost'])->name('delPost');
+        Route::get('/newsletter/{id}/delete', [BNewsletter::class, 'delNewsletter'])->name('delNewsletter');
+        Route::get('/products/{id}/delete', [ProductController::class, 'delete'])->name('delProduct');
+        Route::get('/services/{id}/delete', [\App\Http\Controllers\Backend\ServiceController::class, 'delete'])->name('delService');
+        Route::get('/useful-links/{id}/delete', [\App\Http\Controllers\Backend\UseFulLinkController::class, 'delete'])->name('delLinks');
+        Route::get('/news/{id}/delete', [\App\Http\Controllers\Backend\NewsController::class, 'delete'])->name('delNews');
+    });
 
 //Resources
-    Route::resource('/categories', BCategory::class);
-    Route::resource('/site-languages', BSiteLan::class);
-    Route::resource('/contact-us', BContact::class);
-    Route::resource('/about', BAbout::class);
-    Route::resource('/settings', BSetting::class);
-    Route::resource('/users', BAdmin::class);
-    Route::resource('/my-informations', BInformation::class);
-    Route::resource('/posts', BPost::class);
-    Route::resource('/seo', BMeta::class);
-    Route::resource('/newsletter', BNewsletter::class);
-    Route::resource('/statistics', BStatistics::class);
-    Route::resource('/slider', BSlider::class);
-    Route::resource('/permissions', BPermission::class);
-    Route::resource('/products', ProductController::class);
-    Route::resource('/services', \App\Http\Controllers\Backend\ServiceController::class);
-    Route::resource('/useful-links', \App\Http\Controllers\Backend\UsefulLinkController::class);
-    Route::resource('/news', \App\Http\Controllers\Backend\NewsController::class);
+    Route::group(['name' => 'resource'], function () {
+Route::resource('/gallery',App\Http\Controllers\Backend\GalleryController::class);
+
+        Route::resource('/content', App\Http\Controllers\Backend\ContentController::class);
+        Route::resource('/categories', BCategory::class);
+        Route::resource('/site-languages', BSiteLan::class);
+        Route::resource('/contact-us', BContact::class);
+        Route::resource('/about', BAbout::class);
+        Route::resource('/settings', BSetting::class);
+        Route::resource('/users', BAdmin::class);
+        Route::resource('/my-informations', BInformation::class);
+        Route::resource('/posts', BPost::class);
+        Route::resource('/seo', BMeta::class);
+        Route::resource('/newsletter', BNewsletter::class);
+        Route::resource('/statistics', BStatistics::class);
+        Route::resource('/slider', BSlider::class);
+        Route::resource('/permissions', BPermission::class);
+        Route::resource('/products', ProductController::class);
+        Route::resource('/services', \App\Http\Controllers\Backend\ServiceController::class);
+        Route::resource('/useful-links', \App\Http\Controllers\Backend\UseFulLinkController::class);
+        Route::resource('/news', \App\Http\Controllers\Backend\NewsController::class);
+    });
 });
 

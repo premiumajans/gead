@@ -9,6 +9,8 @@ return new class extends Migration {
     {
         Schema::create('abouts', function (Blueprint $table) {
             $table->id();
+            $table->longText('photo')->nullable();
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

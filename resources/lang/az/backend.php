@@ -79,6 +79,7 @@
   'elements' => 'Elementlər',
   'email' => 'E-poçt',
   'end' => 'Son',
+  'etibar' => '',
   'event' => 'Event',
   'experience' => 'Təcrübə',
   'follow-us' => 'Bizi izləyin',
@@ -171,6 +172,7 @@
   'slug' => 'Slug',
   'statistics' => 'Statistika',
   'status' => 'Status',
+  'sub-categories' => 'Sub Kateqoriyalar',
   'subject' => 'Mövzu',
   'subject-type' => 'Mövzu növü',
   'submit' => 'Təsdiqlə',
@@ -207,5 +209,5 @@
   'you-have-new-order' => 'Yeni sifarişiniz var',
   'your-item-message' => 'Elanınız nəzərdən keçirilməsini gözləyir.Elanı redaktə etmək və silmək üçün elanın nömrəsini yadda saxlayın.',
   'your-item-number' => 'Elanınızın nömrəsi',
-  'etibar' => '',
+  'gallery' => '',
 );

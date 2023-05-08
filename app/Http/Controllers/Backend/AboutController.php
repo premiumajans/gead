@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\CRUDHelper;
 use App\Models\About;
+use App\Models\AboutTranslation;
 use App\Models\WhyGefen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,16 +16,62 @@ class AboutController extends Controller
 {
     public function index()
     {
-        $about = About::first();
-        $why = WhyGefen::first();
+        check_permission('about index');
+        $abouts = About::all();
         return view('backend.about.index', get_defined_vars());
+    }
+
+    public function create()
+    {
+        check_permission('about create');
+        return view('backend.about.create');
+    }
+
+    public function store(Request $request)
+    {
+        check_permission('about create');
+        try {
+            $about = new About();
+            if ($request->hasFile('photo')) {
+                $about->photo = upload('about', $request->file('photo'));
+            }
+            $about->save();
+            foreach (active_langs() as $lang) {
+                $translation = new AboutTranslation();
+                $translation->locale = $lang->code;
+                $translation->about_id = $about->id;
+                $translation->title = $request->title[$lang->code];
+                $translation->description = $request->description[$lang->code];
+                $translation->save();
+            }
+            alert()->success(__('messages.success'));
+            return redirect(route('backend.about.index'));
+        } catch (\Exception $e) {
+            alert()->error(__('messages.error'));
+            return redirect(route('backend.about.index'));
+        }
+    }
+
+    public function edit($id)
+    {
+        check_permission('about edit');
+        $about = About::find($id);
+        return view('backend.about.edit', get_defined_vars());
     }
 
     public function update(Request $request, About $about)
     {
+        check_permission('about edit');
         try {
             DB::transaction(function () use ($request, $about) {
+                if ($request->hasFile('photo')) {
+                    if (file_exists($about->photo)) {
+                        unlink(public_path($about->photo));
+                    }
+                    $about->photo = upload('about', $request->file('photo'));
+                }
                 foreach (active_langs() as $lang) {
+                    $about->translate($lang->code)->title = $request->title[$lang->code];
                     $about->translate($lang->code)->description = $request->description[$lang->code];
                 }
                 $about->save();
@@ -36,39 +84,15 @@ class AboutController extends Controller
         }
     }
 
-    public function whyGefen(Request $request, $id)
+    public function delete($id)
     {
-        try {
-            $why = WhyGefen::find($id);
-            DB::transaction(function () use ($request, $why) {
-                if ($request->hasFile('photo1')) {
-                    if (file_exists($why->photo_1)) {
-                        unlink($why->photo_1);
-                    }
-                    $why->photo_1 = upload('why', $request->file('photo1'));
-                }
-                if ($request->hasFile('photo2')) {
-                    if (file_exists($why->photo_2)) {
-                        unlink($why->photo_2);
-                    }
-                    $why->photo_2 = upload('why', $request->file('photo2'));
-                }
-                if ($request->hasFile('photo3')) {
-                    if (file_exists($why->photo_3)) {
-                        unlink($why->photo_3);
-                    }
-                    $why->photo_3 = upload('why', $request->file('photo3'));
-                }
-                foreach (active_langs() as $lang) {
-                    $why->translate($lang->code)->description = $request->description[$lang->code];
-                }
-                $why->save();
-            });
-            alert()->success(__('messages.success'));
-            return redirect(route('backend.about.index'));
-        } catch (\Exception $e) {
-            alert()->error(__('messages.error'));
-            return redirect(route('backend.about.index'));
-        }
+        check_permission('about delete');
+        return CRUDHelper::remove_item('\App\Models\About', $id);
+    }
+
+    public function status($id)
+    {
+        check_permission('about edit');
+        return CRUDHelper::status('\App\Models\About', $id);
     }
 }

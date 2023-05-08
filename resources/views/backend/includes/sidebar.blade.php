@@ -2,6 +2,7 @@
     <div data-simplebar class="h-100">
         <div id="sidebar-menu">
             <ul class="metismenu list-unstyled" id="side-menu">
+{{--                {{ creation('Gallery','Gallery',true,true) }}--}}
                 <li>
                     <a href="{{ route('backend.dashboard') }}" class="waves-effect">
                         <i class="ri-home-4-fill"></i>
@@ -9,6 +10,22 @@
                     </a>
                 </li>
                 <li class="menu-title">@lang('backend.site-setting')</li>
+                @can('content index')
+                    <li>
+                        <a href="{{ route('backend.content.index') }}" class="waves-effect">
+                            <i class="fas fa-file"></i>
+                            <span>@lang('backend.content')</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('gallery index')
+                    <li>
+                        <a href="{{ route('backend.gallery.index') }}" class="waves-effect">
+                            <i class="fas fa-images"></i>
+                            <span>@lang('backend.gallery')</span>
+                        </a>
+                    </li>
+                @endcan
                 <li>
                     <a href="{{ route('backend.products.index') }}" class="waves-effect">
                         <i class="fas fa-wine-glass-alt"></i>
@@ -51,7 +68,7 @@
                         <span>@lang('backend.contact-us')</span>
                     </a>
                 </li>
-{{--                {{ creation('Etibar',false) }}--}}
+                {{--                {{ creation('Etibar',false) }}--}}
                 @can('news index')
                     <li>
                         <a href="{{ route('backend.news.index') }}" class="waves-effect">
@@ -60,7 +77,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('usefulLink index')
+                @can('UseFulLink index')
                     <li>
                         <a href="{{ route('backend.useful-links.index') }}" class="waves-effect">
                             <i class="fas fa-link"></i>
@@ -97,14 +114,6 @@
                         <a href="{{ route('backend.permissions.index') }}" class=" waves-effect">
                             <i class="ri-lock-2-fill"></i>
                             <span>@lang('backend.permissions')</span>
-                        </a>
-                    </li>
-                @endcan
-                @can('permissions create')
-                    <li>
-                        <a href="{{ route('backend.givePermission') }}" class=" waves-effect">
-                            <i class="ri-lock-unlock-fill"></i>
-                            <span>@lang('backend.give-permission')</span>
                         </a>
                     </li>
                 @endcan
