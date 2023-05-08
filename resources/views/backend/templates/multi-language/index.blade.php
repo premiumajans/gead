@@ -30,7 +30,7 @@
                         <td>{{ $selection->id }}</td>
                         <td>{{ $selection->slug }}</td>
                         <td>{{ date('d.m.Y H:i:s',strtotime($selection->created_at)) }}</td>
-                        @include('backend.templates.components.dt-settings',['selection' => 'selection'])
+                        @include('backend.templates.components.dt-settings',['variable' => 'selection','value' => $value])
                     </tr>
                 @endforeach
                 </tbody>

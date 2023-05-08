@@ -56,12 +56,14 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
     Route::get('order/{id}', [BOrder::class, 'read'])->name('orderRead');
     Route::post('change-category', [\App\Http\Controllers\Backend\ContentController::class, 'changeCategory'])->name('changeCategory');
     Route::post('change-alt-category', [\App\Http\Controllers\Backend\ContentController::class, 'changeAltCategory'])->name('changeAltCategory');
+    Route::get('gallery/{id}/photos', [\App\Http\Controllers\Backend\GalleryController::class, 'photos'])->name('gallery.photos');
+    Route::get('gallery/photos/{id}/delete', [\App\Http\Controllers\Backend\GalleryController::class, 'photosDelete'])->name('gallery.photos.delete');
+    Route::post('gallery/{id}/photos/store', [\App\Http\Controllers\Backend\GalleryController::class, 'photosStore'])->name('gallery.photos.store');
 
 
 //Statuses
     Route::group(['name' => 'status'], function () {
-Route::get('gallery/{id}/change-status',[App\Http\Controllers\Backend\GalleryController::class,'status'])->name('galleryStatus');
-
+        Route::get('gallery/{id}/change-status', [App\Http\Controllers\Backend\GalleryController::class, 'status'])->name('galleryStatus');
         Route::get('about/{id}/change-status', [App\Http\Controllers\Backend\AboutController::class, 'status'])->name('aboutStatus');
         Route::get('content/{id}/change-status', [App\Http\Controllers\Backend\ContentController::class, 'status'])->name('contentStatus');
         Route::get('/site-language/{id}/change-status', [BSiteLan::class, 'siteLanStatus'])->name('siteLanStatus');
@@ -79,10 +81,8 @@ Route::get('gallery/{id}/change-status',[App\Http\Controllers\Backend\GalleryCon
 
 //Delete
     Route::group(['name' => 'delete'], function () {
-Route::get('gallery/{id}/delete',[App\Http\Controllers\Backend\GalleryController::class,'delete'])->name('galleryDelete');
-
+        Route::get('gallery/{id}/delete', [App\Http\Controllers\Backend\GalleryController::class, 'delete'])->name('galleryDelete');
         Route::get('about/{id}/delete', [App\Http\Controllers\Backend\AboutController::class, 'delete'])->name('aboutDelete');
-
         Route::get('content/{id}/delete', [App\Http\Controllers\Backend\ContentController::class, 'delete'])->name('contentDelete');
         Route::get('/site-languages/{id}/delete', [BSiteLan::class, 'delSiteLang'])->name('delSiteLang');
         Route::get('/categories/{id}/delete', [BCategory::class, 'delCategory'])->name('delCategory');
@@ -105,7 +105,7 @@ Route::get('gallery/{id}/delete',[App\Http\Controllers\Backend\GalleryController
 
 //Resources
     Route::group(['name' => 'resource'], function () {
-Route::resource('/gallery',App\Http\Controllers\Backend\GalleryController::class);
+        Route::resource('/gallery', App\Http\Controllers\Backend\GalleryController::class);
 
         Route::resource('/content', App\Http\Controllers\Backend\ContentController::class);
         Route::resource('/categories', BCategory::class);

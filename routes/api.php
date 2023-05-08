@@ -21,3 +21,5 @@ Route::get('settings', [\App\Http\Controllers\Api\SettingsController::class, 'in
 Route::get('settings/{name}', [\App\Http\Controllers\Api\SettingsController::class, 'show']);
 Route::get('about', [\App\Http\Controllers\Api\AboutController::class, 'index']);
 Route::get('about/{id}', [\App\Http\Controllers\Api\AboutController::class, 'show']);
+Route::get('gallery', [\App\Http\Controllers\Api\GalleryController::class, 'index']);
+Route::get('gallery/{id}', [\App\Http\Controllers\Api\GalleryController::class, 'show']);

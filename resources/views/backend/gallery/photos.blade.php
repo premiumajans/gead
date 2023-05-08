@@ -13,6 +13,31 @@
                         <div class="col-12">
                             <div
                                 class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">@lang('backend.add-new'):@lang('backend.photos')</h4>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <form action="{{ route('backend.gallery.photos.store',$id) }}" class="needs-validation" novalidate
+                                  method="post"
+                                  enctype="multipart/form-data">
+                                @csrf
+                                <input hidden="" name="gallery_id" value="{{ $id }}">
+                                <div class="mb-3">
+                                    <label>@lang('backend.photos')</label>
+                                    <input type="file" class="form-control mb-2" id="photos" name="photos[]"
+                                           multiple>
+                                    <div id="image-preview-container" class="d-flex flex-wrap"></div>
+                                </div>
+                                @include('backend.templates.components.buttons')
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-12">
+                            <div
+                                class="page-title-box d-sm-flex align-items-center justify-content-between">
                                 <h4 class="mb-sm-0">@lang('backend.gallery'):</h4>
                                 <a href="{{ route('backend.gallery.create') }}"
                                    class="btn btn-primary mb-3"><i
@@ -26,24 +51,20 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>@lang('backend.name'):</th>
-                                <th>@lang('backend.time'):</th>
-                                <th>@lang('backend.photos'):</th>
+                                <th>@lang('backend.photo'):</th>
                                 <th>@lang('backend.actions'):</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($gallerys as $gallery)
+                            @foreach($photos->photos as $gallery)
                                 <tr>
                                     <td>{{ $gallery->id }}</td>
-                                    <td>{{ $gallery->translate('az')->name ?? '-' }}</td>
-                                    <td>{{ date('d.m.Y H:i:s',strtotime($gallery->created_at)) }}</td>
+                                    <td><img width="200px" height="150px" src="{{ asset($gallery->photo) }}"></td>
                                     <td class="text-center">
-                                        <a class="btn btn-primary"
-                                           href="{{ route('backend.gallery.photos',['id'=>$gallery->id]) }}"><i
-                                                class="fas fa-images"></i></a>
+                                        <a class="btn btn-danger"
+                                           href="{{ route('backend.gallery.photos.delete',['id'=>$gallery->id]) }}"><i
+                                                class="fas fa-trash"></i></a>
                                     </td>
-                                    @include('backend.templates.components.dt-settings',['variable' => 'gallery','value' => $gallery])
                                 </tr>
                             @endforeach
                             </tbody>
@@ -55,5 +76,6 @@
     </div>
 @endsection
 @section('scripts')
+    @include('backend.templates.components.preview-images')
     @include('backend.templates.components.dt-scripts')
 @endsection

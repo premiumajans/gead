@@ -6,20 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('gallery_translations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('gallery_id')->unsigned();
+            $table->string('locale')->index();
+            $table->longText('name');
+            $table->unique(['gallery_id', 'locale']);
+            $table->foreign('gallery_id')->references('id')->on('galleries')->onDelete('cascade');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('gallery_translations');
