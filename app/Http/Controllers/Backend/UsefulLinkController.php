@@ -8,7 +8,7 @@ use App\Models\UseFulLink;
 use Exception;
 use Illuminate\Http\Request;
 
-class UseFulLinkController extends Controller
+class UseFullinkController extends Controller
 {
     public function index()
     {

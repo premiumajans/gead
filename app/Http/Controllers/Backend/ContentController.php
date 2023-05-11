@@ -24,14 +24,15 @@ class ContentController extends Controller
         check_permission('content create');
         $categories = Category::where('status', 1)->get();
         $altCategories = AltCategory::where('category_id', $categories[0]->id)->get();
-        if ($altCategories[0]->sub()->exists()) {
-            $subCategories = $altCategories[0]->sub()->get();
-        }
+//        if ($altCategories[0]->sub()->exists()) {
+//            $subCategories = $altCategories[0]->sub()->get();
+//        }
         return view('backend.content.create', get_defined_vars());
     }
 
     public function store(Request $request)
     {
+        dd($request->all());
         check_permission('content create');
         try {
 

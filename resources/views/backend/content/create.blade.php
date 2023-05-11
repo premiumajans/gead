@@ -1,5 +1,8 @@
 @extends('master.backend')
 @section('title',__('backend.content'))
+@section('styles')
+    @livewireStyles
+@endsection
 @section('content')
     <div class="main-content">
         <div class="page-content">
@@ -40,35 +43,7 @@
                                                 </div>
                                             </div>
                                         @endforeach
-                                        <div class="mb-3">
-                                            <label>@lang('backend.category')</label>
-                                            <select class="form-control" name="category" id="category">
-                                                @foreach($categories as $category)
-                                                    <option
-                                                        value="{{ $category->id }}">{{ $category->translate(app()->getLocale())->name ?? '-' }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-3" id="altCategoryDiv">
-                                            <label>@lang('backend.alt-categories')</label>
-                                            <select class="form-control" name="altCategory" id="altCategory">
-                                                @foreach($altCategories as $alt)
-                                                    <option
-                                                        value="{{ $alt->id }}">{{ $alt->translate(app()->getLocale())->name ?? '-' }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        @if(!empty($subCategories))
-                                            <div class="mb-3" id="subCategoryDiv">
-                                                <label>@lang('backend.sub-categories')</label>
-                                                <select class="form-control" name="subCategory" id="subCategory">
-                                                    @foreach($subCategories as $sub)
-                                                        <option
-                                                            value="{{ $sub->id }}">{{ $sub->translate(app()->getLocale())->name ?? '-' }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        @endif
+                                        @livewire('content-category')
                                         <div class="mb-3">
                                             <label>@lang('backend.photo')</label>
                                             <input name="photo" type="file" class="form-control">
@@ -88,49 +63,51 @@
         </div>
     </div>
 @endsection
+
 @section('scripts')
+    @livewireScripts
     @include('backend.templates.components.tiny')
     @include('backend.templates.components.preview-images')
-    <script>
-        $(document).ready(function () {
-            $('#category').on('change', function () {
-                var catID = $('#category').val();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                });
-                $.ajax({
-                    url: "{{ route('backend.changeCategory') }}",
-                    type: "POST",
-                    data: {
-                        category_id: catID,
-                    },
-                    success: function (data) {
-                        $("#altCategory").remove();
-                        $("#altCategoryDiv").append(data);
-                    },
-                });
-            });
-            $('#altCategory').on('change', function () {
-                var altID = $('#altCategory').val();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                });
-                $.ajax({
-                    url: "{{ route('backend.changeAltCategory') }}",
-                    type: "POST",
-                    data: {
-                        alt_id: altID,
-                    },
-                    success: function (data) {
-                        $("#subCategory").remove();
-                        $("#subCategoryDiv").append(data);
-                    },
-                });
-            });
-        });
-    </script>
+{{--    <script>--}}
+{{--        $(document).ready(function () {--}}
+{{--            $('#category').on('change', function () {--}}
+{{--                var catID = $('#category').val();--}}
+{{--                $.ajaxSetup({--}}
+{{--                    headers: {--}}
+{{--                        'X-CSRF-TOKEN': '{{ csrf_token() }}'--}}
+{{--                    }--}}
+{{--                });--}}
+{{--                $.ajax({--}}
+{{--                    url: "{{ route('backend.changeCategory') }}",--}}
+{{--                    type: "POST",--}}
+{{--                    data: {--}}
+{{--                        category_id: catID,--}}
+{{--                    },--}}
+{{--                    success: function (data) {--}}
+{{--                        $("#altCategory").remove();--}}
+{{--                        $("#altCategoryDiv").append(data);--}}
+{{--                    },--}}
+{{--                });--}}
+{{--            });--}}
+{{--            $('#altCategory').on('change', function () {--}}
+{{--                var altID = $('#altCategory').val();--}}
+{{--                $.ajaxSetup({--}}
+{{--                    headers: {--}}
+{{--                        'X-CSRF-TOKEN': '{{ csrf_token() }}'--}}
+{{--                    }--}}
+{{--                });--}}
+{{--                $.ajax({--}}
+{{--                    url: "{{ route('backend.changeAltCategory') }}",--}}
+{{--                    type: "POST",--}}
+{{--                    data: {--}}
+{{--                        alt_id: altID,--}}
+{{--                    },--}}
+{{--                    success: function (data) {--}}
+{{--                        $("#subCategory").remove();--}}
+{{--                        $("#subCategoryDiv").append(data);--}}
+{{--                    },--}}
+{{--                });--}}
+{{--            });--}}
+{{--        });--}}
+{{--    </script>--}}
 @endsection

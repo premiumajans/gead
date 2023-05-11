@@ -15,7 +15,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "laravolt/avatar": "^5.0",
-        "livewire/livewire": "^2.11",
+        "livewire/livewire": "^2.12",
         "realrashid/sweet-alert": "*",
         "spatie/laravel-activitylog": "^4.7",
         "spatie/laravel-analytics": "*",
@@ -49,7 +49,8 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan vendor:publish --force --tag=livewire:assets --ansi"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"

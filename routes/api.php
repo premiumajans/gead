@@ -15,8 +15,8 @@ Route::get('/settings', function () {
 Route::post('contact', [\App\Http\Controllers\Api\ContactController::class, 'store']);
 Route::get('categories', [\App\Http\Controllers\Api\CategoryController::class, 'index']);
 Route::get('categories/{id}', [\App\Http\Controllers\Api\CategoryController::class, 'show']);
-Route::get('useful-links', [\App\Http\Controllers\Api\UseFulLinkController::class, 'index']);
-Route::get('useful-links/{id}', [\App\Http\Controllers\Api\UseFulLinkController::class, 'show']);
+Route::get('useful-links', [\App\Http\Controllers\Api\UseFullinkController::class, 'index']);
+Route::get('useful-links/{id}', [\App\Http\Controllers\Api\UseFullinkController::class, 'show']);
 Route::get('settings', [\App\Http\Controllers\Api\SettingsController::class, 'index']);
 Route::get('settings/{name}', [\App\Http\Controllers\Api\SettingsController::class, 'show']);
 Route::get('about', [\App\Http\Controllers\Api\AboutController::class, 'index']);

@@ -11,6 +11,10 @@ return new class extends Migration {
             $table->id();
             $table->longText('photo')->nullable();
             $table->integer('view')->default(0);
+            $table->string('category_id');
+            $table->string('alt_id')->nullable();
+            $table->string('sub_id')->nullable();
+            $table->string('pdf')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

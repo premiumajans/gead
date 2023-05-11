@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\UseFulLink;
 use Illuminate\Http\Request;
 
-class UsefulLinkController extends Controller
+class UseFullinkController extends Controller
 {
     public function index()
     {
