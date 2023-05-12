@@ -4,55 +4,40 @@ namespace App\Http\Livewire;
 
 use App\Models\AltCategory;
 use App\Models\Category;
+use App\Models\Content;
 use App\Models\SubCategory;
 use JetBrains\PhpStorm\NoReturn;
 use Livewire\Component;
+use mysql_xdevapi\XSession;
 
 class ContentCategory extends Component
 {
-//    public $categories = [];
-//    public $alts = [];
-//
-//    public $subs = [];
-//
-//    public $selectedOption;
-//
-//    public $selectedOptionAlt = 1;
-//
-//    public function mount()
-//    {
-//        $this->categories = Category::where('status', 1)->get();
-////        $this->alts = AltCategory::where('category_id', $this->categories[0]->id)->get();
-////        if ($this->alts[0]->sub()->exists()) {
-////            $this->subs = $this->alts[0]->sub()->get();
-////        }
-//    }
-//
-//    public function render()
-//    {
-//        return view('livewire.content-category',get_defined_vars());
-//    }
-//
-//    public function optionChanged()
-//    {
-//        if ($this->selectedOption != '-1') {
-//            $this->alts = AltCategory::where('category_id', $this->selectedOption)->get();
-//        }else{
-//            $this->alts = ['sasa','sasas'];
-//        }
-//        $this->render();
-//    }
     public $continents = [];
     public $countries = [];
 
     public $subs = [];
 
+    public $update;
+    public $updatedCat;
+    public $updatedAltCat;
+    public $updatedSubCat;
     public $selectedContinent;
     public $selectedCountry;
+
+    public $newAltCat = [];
 
     public function mount()
     {
         $this->continents = Category::all();
+        if ($this->update != null) {
+            $content = Content::where('id', $this->update)->first();
+            $this->updatedCat = $content->category_id;
+            $this->updatedAltCat = $content->alt_id;
+            $this->updatedSubCat = $content->sub_id;
+            $this->newAltCat = AltCategory::where('category_id',$content->category_id)->get();
+//            dd($this->newAltCat);
+        }
+
     }
 
     public function render()
@@ -66,6 +51,7 @@ class ContentCategory extends Component
             $this->countries = AltCategory::where('category_id', $this->selectedContinent)->get();
         }
     }
+
     public function changeSub()
     {
         if ($this->selectedCountry !== '-1') {

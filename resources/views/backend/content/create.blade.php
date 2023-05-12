@@ -33,7 +33,7 @@
                                                     <div class="mb-3">
                                                         <label>@lang('backend.content') <span
                                                                 class="text-danger">*</span></label>
-                                                        <textarea name="content[{{ $lan->code }}]"
+                                                        <textarea name="content1[{{ $lan->code }}]"
                                                                   id="elm{{$lan->code}}1"
                                                                   class="form-control"
                                                                   required=""
@@ -44,6 +44,11 @@
                                             </div>
                                         @endforeach
                                         @livewire('content-category')
+                                        <div class="mb-3">
+                                            <label>PDF</label>
+                                            <input name="pdf" type="file" class="form-control"
+                                                   accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf">
+                                        </div>
                                         <div class="mb-3">
                                             <label>@lang('backend.photo')</label>
                                             <input name="photo" type="file" class="form-control">
@@ -63,51 +68,8 @@
         </div>
     </div>
 @endsection
-
 @section('scripts')
     @livewireScripts
     @include('backend.templates.components.tiny')
     @include('backend.templates.components.preview-images')
-{{--    <script>--}}
-{{--        $(document).ready(function () {--}}
-{{--            $('#category').on('change', function () {--}}
-{{--                var catID = $('#category').val();--}}
-{{--                $.ajaxSetup({--}}
-{{--                    headers: {--}}
-{{--                        'X-CSRF-TOKEN': '{{ csrf_token() }}'--}}
-{{--                    }--}}
-{{--                });--}}
-{{--                $.ajax({--}}
-{{--                    url: "{{ route('backend.changeCategory') }}",--}}
-{{--                    type: "POST",--}}
-{{--                    data: {--}}
-{{--                        category_id: catID,--}}
-{{--                    },--}}
-{{--                    success: function (data) {--}}
-{{--                        $("#altCategory").remove();--}}
-{{--                        $("#altCategoryDiv").append(data);--}}
-{{--                    },--}}
-{{--                });--}}
-{{--            });--}}
-{{--            $('#altCategory').on('change', function () {--}}
-{{--                var altID = $('#altCategory').val();--}}
-{{--                $.ajaxSetup({--}}
-{{--                    headers: {--}}
-{{--                        'X-CSRF-TOKEN': '{{ csrf_token() }}'--}}
-{{--                    }--}}
-{{--                });--}}
-{{--                $.ajax({--}}
-{{--                    url: "{{ route('backend.changeAltCategory') }}",--}}
-{{--                    type: "POST",--}}
-{{--                    data: {--}}
-{{--                        alt_id: altID,--}}
-{{--                    },--}}
-{{--                    success: function (data) {--}}
-{{--                        $("#subCategory").remove();--}}
-{{--                        $("#subCategoryDiv").append(data);--}}
-{{--                    },--}}
-{{--                });--}}
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
 @endsection

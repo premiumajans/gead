@@ -140,6 +140,7 @@ return array (
   'password' => 'Şifrə',
   'pay-to-card' => 'Kartla ödəniş',
   'payment-method' => 'Ödəniş üsulu',
+  'pdf' => 'PDF',
   'pending' => 'Gözləmədədir',
   'pending-posts' => 'Gözləyən postlar',
   'pending-vacancies' => 'Gözləyən vakansiyalar',

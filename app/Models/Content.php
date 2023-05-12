@@ -18,7 +18,7 @@ class Content extends Model implements TranslatableContract
 
     public function photos()
     {
-        return $this->hasMany(GalleryPhotos::class);
+        return $this->hasMany(ContentPhotos::class);
     }
 
     public function getActivitylogOptions(): LogOptions

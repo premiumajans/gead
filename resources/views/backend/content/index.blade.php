@@ -22,7 +22,7 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>@lang('backend.slug'):</th>
+                                <th>@lang('backend.name'):</th>
                                 <th>@lang('backend.time'):</th>
                                 <th>@lang('backend.actions'):</th>
                             </tr>
@@ -31,9 +31,9 @@
                             @foreach($contents as $content)
                                 <tr>
                                     <td>{{ $content->id }}</td>
-                                    <td>{{ $content->slug }}</td>
+                                    <td>{{ $content->translate('az')->name ?? '-' }}</td>
                                     <td>{{ date('d.m.Y H:i:s',strtotime($content->created_at)) }}</td>
-                                    @include('backend.templates.components.dt-settings',['content' => 'content'])
+                                    @include('backend.templates.components.dt-settings',['variable' => 'content','value' => $content])
                                 </tr>
                             @endforeach
                             </tbody>

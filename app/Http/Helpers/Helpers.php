@@ -27,6 +27,22 @@ if (!function_exists('upload')) {
     }
 }
 
+if (!function_exists('pdf_upload')) {
+    function pdf_upload($file)
+    {
+        try {
+            $img = $file;
+            $extension = $img->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $img->move('pdf', $filename);
+            $data['pdf'] = 'pdf/' . $filename;
+            return $data['pdf'];
+        } catch (Exception $e) {
+            return redirect()->back();
+        }
+    }
+}
+
 if (!function_exists('multi_upload')) {
     function multi_upload($path, $files): array|\Illuminate\Http\RedirectResponse
     {

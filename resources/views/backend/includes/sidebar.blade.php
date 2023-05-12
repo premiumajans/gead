@@ -18,6 +18,14 @@
                         </a>
                     </li>
                 @endcan
+                @can('slider index')
+                    <li>
+                        <a href="{{ route('backend.slider.index') }}" class="waves-effect">
+                            <i class="fas fa-images"></i>
+                            <span>@lang('backend.slider')</span>
+                        </a>
+                    </li>
+                @endcan
                 @can('gallery index')
                     <li>
                         <a href="{{ route('backend.gallery.index') }}" class="waves-effect">

@@ -23,3 +23,6 @@ Route::get('about', [\App\Http\Controllers\Api\AboutController::class, 'index'])
 Route::get('about/{id}', [\App\Http\Controllers\Api\AboutController::class, 'show']);
 Route::get('gallery', [\App\Http\Controllers\Api\GalleryController::class, 'index']);
 Route::get('gallery/{id}', [\App\Http\Controllers\Api\GalleryController::class, 'show']);
+
+Route::get('slider', [\App\Http\Controllers\Api\SliderController::class, 'index']);
+Route::get('slider/{id}', [\App\Http\Controllers\Api\SliderController::class, 'show']);

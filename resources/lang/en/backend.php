@@ -6,4 +6,5 @@
   'content' => '',
   'sub-categories' => '',
   'gallery' => '',
+  'pdf' => '',
 );

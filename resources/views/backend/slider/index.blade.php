@@ -32,7 +32,6 @@
                                 <th>ID</th>
                                 <th>Order:</th>
                                 <th>@lang('backend.photo'):</th>
-                                <th>@lang('backend.alt'):</th>
                                 <th>@lang('backend.time'):</th>
                                 <th>@lang('backend.status'):</th>
                                 <th>@lang('backend.actions'):</th>
@@ -44,7 +43,6 @@
                                     <td class="text-center">{{ $slider->id }}</td>
                                     <td class="text-center">{{ $slider->order }}</td>
                                     <td class="text-center"><img src="{{ asset($slider->photo) }}" width="100" height="50">
-                                    <td class="text-center">{{ $slider->alt }}</td>
                                     <td>{{ date('d.m.Y H:i:s',strtotime($slider->created_at))}}</td>
                                     <td class="text-center">
                                         <a href="{{ route('backend.sliderStatus',['id'=>$slider->id]) }}"
