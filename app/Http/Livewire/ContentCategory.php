@@ -22,6 +22,7 @@ class ContentCategory extends Component
     public $updatedAltCat;
     public $updatedSubCat;
     public $selectedContinent;
+    public $selectedSub;
     public $selectedCountry;
 
     public $newAltCat = [];
@@ -31,11 +32,13 @@ class ContentCategory extends Component
         $this->continents = Category::all();
         if ($this->update != null) {
             $content = Content::where('id', $this->update)->first();
-            $this->updatedCat = $content->category_id;
-            $this->updatedAltCat = $content->alt_id;
-            $this->updatedSubCat = $content->sub_id;
-            $this->newAltCat = AltCategory::where('category_id',$content->category_id)->get();
-//            dd($this->newAltCat);
+            $this->selectedContinent = $content->category_id;
+            $this->selectedCountry = $content->alt_id;
+            $this->newAltCat = AltCategory::where('category_id', $content->category_id)->get();
+            if ($content->sub_id != (null and -1)) {
+                $this->selectedSub = $content->sub_id;
+                $this->subs = SubCategory::where('alt_category_id', $content->alt_id)->get();
+            }
         }
 
     }
@@ -47,8 +50,9 @@ class ContentCategory extends Component
 
     public function changeCategory()
     {
-        if ($this->selectedContinent !== '-1') {
+        if ($this->selectedContinent != '-1') {
             $this->countries = AltCategory::where('category_id', $this->selectedContinent)->get();
+            $this->newAltCat = AltCategory::where('category_id', $this->selectedContinent)->get();
         }
     }
 

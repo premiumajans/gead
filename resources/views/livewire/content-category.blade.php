@@ -3,7 +3,7 @@
         <div class="mb-3">
             <label>@lang('backend.categories')</label>
             <select wire:model="selectedContinent" wire:change="changeCategory" class="form-control" name="category">
-                <option value="-1">@lang('backend.categories')</option>
+                <option value="-1">-- @lang('backend.categories') --</option>
                 @foreach($continents as $continent)
                     <option value="{{$continent->id}}">{{$continent->name}}</option>
                 @endforeach
@@ -12,7 +12,7 @@
         <div class="mb-3">
             <label>@lang('backend.alt-categories')</label>
             <select wire:model="selectedCountry" wire:change="changeSub" class="form-control" name="altCategory">
-                <option value="-1">@lang('backend.alt-categories')</option>
+                <option value="-1">-- @lang('backend.alt-categories') --</option>
                 @foreach($countries as $country)
                     <option value="{{$country->id}}">{{$country->name}}</option>
                 @endforeach
@@ -21,7 +21,7 @@
         <div class="mb-3">
             <label>@lang('backend.sub-categories')</label>
             <select class="form-control" name="subCategory">
-                <option value="-1">@lang('backend.sub-categories')</option>
+                <option value="-1">-- @lang('backend.sub-categories') --</option>
                 @foreach($subs as $sub)
                     <option value="{{$sub->id}}">{{$sub->name}}</option>
                 @endforeach
@@ -32,7 +32,8 @@
             <label>@lang('backend.categories')</label>
             <select wire:model="selectedContinent" wire:change="changeCategory" class="form-control" name="category">
                 @foreach($continents as $continent)
-                    <option value="{{$continent->id}}" @if( $continent->id == $updatedCat ) selected @endif>{{$continent->name}}</option>
+                    <option value="{{$continent->id}}"
+                            @if($selectedContinent == $continent->id ) selected @endif>{{$continent->name}}</option>
                 @endforeach
             </select>
         </div>
@@ -40,19 +41,22 @@
             <label>@lang('backend.alt-categories')</label>
             <select wire:model="selectedCountry" wire:change="changeSub" class="form-control" name="altCategory">
                 @foreach($newAltCat as $country)
-                    <option value="{{$country->id}}" @if($country->id  == $updatedAltCat) selected @endif>{{$country->name}}</option>
+                    <option value="{{$country->id}}"
+                            @if($selectedCountry == $country->id) selected @endif>{{$country->name}}</option>
                 @endforeach
             </select>
         </div>
-        <div class="mb-3">
-            <label>@lang('backend.sub-categories')</label>
-            <select class="form-control" name="subCategory">
-                <option value="-1">@lang('backend.sub-categories')</option>
-                @foreach($subs as $sub)
-                    <option value="{{$sub->id}}">{{$sub->name}}</option>
-                @endforeach
-            </select>
-        </div>
+        @if($subs != null)
+            <div class="mb-3">
+                <label>@lang('backend.sub-categories')</label>
+                <select wire:model="selectedSub" class="form-control" name="subCategory" wire:model="selectedSub">
+                    <option value="-1">-- @lang('backend.sub-categories') --</option>
+                    @foreach($subs as $sub)
+                        <option value="{{$sub->id}}"  @if($sub->id == $selectedSub) selected @endif>{{$sub->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        @endif
     @endif
 </div>
 
