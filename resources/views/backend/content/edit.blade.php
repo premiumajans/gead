@@ -29,7 +29,7 @@
                                                         <input name="name[{{ $lan->code }}]" type="text"
                                                                class="form-control"
                                                                required=""
-                                                               value="{{ $content->translate($lan->code)->name ?? '-' }}">
+                                                               value="{{ $content->translate($lan->code)->name ?? __('backend.translation-not-found') }}">
                                                         {!! validation_response('backend.name') !!}
                                                     </div>
                                                     <div class="mb-3">
@@ -39,7 +39,7 @@
                                                                   id="elm{{$lan->code}}1"
                                                                   class="form-control"
                                                                   required=""
-                                                                  placeholder="@lang('backend.content')">{!! $content->translate($lan->code)->content ?? '-' !!}</textarea>
+                                                                  placeholder="@lang('backend.content')">{!! $content->translate($lan->code)->content ?? __('backend.translation-not-found') !!}</textarea>
                                                         {!! validation_response('backend.content') !!}
                                                     </div>
                                                 </div>

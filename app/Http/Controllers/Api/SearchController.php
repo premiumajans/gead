@@ -28,12 +28,13 @@ class SearchController extends Controller
             ->pluck('content_id')->toArray();
         $result = array_unique(array_merge($contentForCategory, $contentForAlt, $contentForSub, $contentTranslations));
         if (!empty($result)) {
-            return response()->json([
-                'keyword' => $keyword,
-                'result' => $result,
-            ], 200);
+            $searchResults = Content::whereIn('id', $result)->get();
         } else {
-            return response()->json('result-not-found');
+            $searchResults = 'result-not-fount';
         }
+        return response()->json([
+            'keyword' => $keyword,
+            'result' => $searchResults,
+        ], 200);
     }
 }

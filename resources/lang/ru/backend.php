@@ -1,4 +1,6 @@
-<?php return array (
+<?php
+
+return array (
   'about' => 'Haqqımızda',
   'actions' => 'Hərəkətlər',
   'active' => 'Aktiv',
@@ -85,6 +87,7 @@
   'follow-us' => 'Bizi izləyin',
   'forgot-password' => 'Şifrəni unutmusunuz?',
   'front_photo' => 'Ön şəkil',
+  'gallery' => '',
   'gead' => 'Gead',
   'gefen' => 'Gefen',
   'gefen-company' => 'GEFEN Company',
@@ -137,6 +140,7 @@
   'password' => 'Şifrə',
   'pay-to-card' => 'Kartla ödəniş',
   'payment-method' => 'Ödəniş üsulu',
+  'pdf' => '',
   'pending' => 'Gözləmədədir',
   'pending-posts' => 'Gözləyən postlar',
   'pending-vacancies' => 'Gözləyən vakansiyalar',
@@ -188,6 +192,7 @@
   'teams-elements' => 'Komanda Elementləri',
   'time' => 'Vaxt',
   'title' => 'Başlıq',
+  'translation-not-found' => 'Перевод не найден!',
   'try-again' => 'Yenidən cəhd edin',
   'unread' => 'Oxunmayıb',
   'updated' => 'Yeniləndi',
@@ -202,6 +207,7 @@
   'voen' => 'Vöen',
   'why-gefen' => 'Niyə GEFEN',
   'work-mode' => 'İş rejimi',
+  'writer' => '',
   'writers' => 'Yazıçılar',
   'you-24' => 'Sayta daxil olmaq üçün 24 yaşdan yuxarı olmalısınız. Zəhmət olmasa yaşınızı təsdiqləyin.',
   'you-agree-terms' => 'Bu sayta daxil olmaqla siz Məxfilik Siyasətimizlə razılaşırsınız',
@@ -209,6 +215,4 @@
   'you-have-new-order' => 'Yeni sifarişiniz var',
   'your-item-message' => 'Elanınız nəzərdən keçirilməsini gözləyir.Elanı redaktə etmək və silmək üçün elanın nömrəsini yadda saxlayın.',
   'your-item-number' => 'Elanınızın nömrəsi',
-  'gallery' => '',
-  'pdf' => '',
 );

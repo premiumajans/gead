@@ -2,7 +2,7 @@
     <div data-simplebar class="h-100">
         <div id="sidebar-menu">
             <ul class="metismenu list-unstyled" id="side-menu">
-                {{--                {{ creation('Gallery','Gallery',true,true) }}--}}
+{{--                                {{ creation('Writer','Writer',true,false) }}--}}
                 <li>
                     <a href="{{ route('backend.dashboard') }}" class="waves-effect">
                         <i class="ri-home-4-fill"></i>
@@ -39,6 +39,14 @@
                         <a href="{{ route('backend.categories.index') }}" class="waves-effect">
                             <i class="fas fa-bars"></i>
                             <span>@lang('backend.categories')</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('writer index')
+                    <li>
+                        <a href="{{ route('backend.writer.index') }}" class="waves-effect">
+                            <i class="fas fa-pen-nib"></i>
+                            <span>@lang('backend.writer')</span>
                         </a>
                     </li>
                 @endcan

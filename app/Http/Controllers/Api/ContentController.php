@@ -16,36 +16,54 @@ class ContentController extends Controller
     public function index()
     {
         if (Content::where('status', 1)->exists()) {
-            return response()->json(Content::where('status', 1)->get());
+            return response()->json(['content' => Content::where('status', 1)->get()]);
         } else {
-            return response()->json('content-is-empty');
+            return response()->json(['content' => 'content-is-empty']);
         }
     }
-    public function show($id){
+
+    public function show($id)
+    {
         if (Content::where('id', $id)->exists()) {
             $content = Content::where('id', $id)->first();
+            if ($content->sub_id != (-1 && null)) {
+                $related = Content::where('id', '<>', $content->id)
+                    ->where('sub_id', $content->sub_id)
+                    ->orderBy('created_at', 'desc')
+                    ->take(env('RELATED_POST_COUNT'))
+                    ->get();
+            } else {
+                $related = Content::where('id', '<>', $content->id)
+                    ->where('alt_id', $content->alt_id)
+                    ->orderBy('created_at', 'desc')
+                    ->take(env('RELATED_POST_COUNT'))
+                    ->get();
+            }
             $content->increment('view');
-            return response()->json($content);
+            return response()->json([
+                'content' => $content,
+                'related' => $related,
+            ]);
         } else {
-            return response()->json('content-is-empty');
+            return response()->json(['content' => 'content-is-empty']);
         }
     }
 
     public function altCat($cat_id, $alt_id)
     {
         if (Content::where('category_id', $cat_id)->where('alt_id', $alt_id)->exists()) {
-            return response()->json(Content::where('category_id', $cat_id)->where('alt_id', $alt_id)->get());
+            return response()->json(['content' => Content::where('category_id', $cat_id)->where('alt_id', $alt_id)->get()]);
         } else {
-            return response()->json('content-is-empty');
+            return response()->json(['content' => 'content-is-empty']);
         }
     }
 
     public function subAltCat($cat_id, $alt_id, $sub_id)
     {
         if (Content::where('category_id', $cat_id)->where('alt_id', $alt_id)->where('sub_id', $sub_id)->exists()) {
-            return response()->json(Content::where('category_id', $cat_id)->where('alt_id', $alt_id)->where('sub_id', $sub_id)->get());
+            return response()->json(['content' => Content::where('category_id', $cat_id)->where('alt_id', $alt_id)->where('sub_id', $sub_id)->get()]);
         } else {
-            return response()->json('content-is-empty');
+            return response()->json(['content' => 'content-is-empty']);
         }
     }
 }

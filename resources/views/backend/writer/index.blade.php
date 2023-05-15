@@ -1,5 +1,5 @@
 @extends('master.backend')
-@section('title',__('backend.content'))
+@section('title',__('backend.writer'))
 @section('styles')
     @include('backend.templates.components.dt-styles')
 @endsection
@@ -11,8 +11,8 @@
                     <div class="card-body">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0">@lang('backend.content'):</h4>
-                                <a href="{{ route('backend.content.create') }}" class="btn btn-primary mb-3"><i
+                                <h4 class="mb-sm-0">@lang('backend.writer'):</h4>
+                                <a href="{{ route('backend.writer.create') }}" class="btn btn-primary mb-3"><i
                                         class="fas fa-plus"></i> &nbsp;@lang('backend.add-new')
                                 </a>
                             </div>
@@ -28,12 +28,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($contents as $content)
+                            @foreach($writers as $writer)
                                 <tr>
-                                    <td>{{ $content->id }}</td>
-                                    <td>{{ $content->translate('az')->name ?? __('backend.translation-not-found') }}</td>
-                                    <td>{{ date('d.m.Y H:i:s',strtotime($content->created_at)) }}</td>
-                                    @include('backend.templates.components.dt-settings',['variable' => 'content','value' => $content])
+                                    <td>{{ $writer->id }}</td>
+                                    <td>{{ $writer->translate(app()->getLocale())->name ?? __('backend.translation-not-found') }}</td>
+                                    <td>{{ date('d.m.Y H:i:s',strtotime($writer->created_at)) }}</td>
+                                    @include('backend.templates.components.dt-settings',['variable' => 'writer','value' => $writer])
                                 </tr>
                             @endforeach
                             </tbody>

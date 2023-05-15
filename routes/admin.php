@@ -36,6 +36,8 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
     Route::get('gallery/photos/{id}/delete', [\App\Http\Controllers\Backend\GalleryController::class, 'photosDelete'])->name('gallery.photos.delete');
     Route::post('gallery/{id}/photos/store', [\App\Http\Controllers\Backend\GalleryController::class, 'photosStore'])->name('gallery.photos.store');
     Route::group(['name' => 'status'], function () {
+Route::get('writer/{id}/change-status',[App\Http\Controllers\Backend\WriterController::class,'status'])->name('writerStatus');
+
         Route::get('gallery/{id}/change-status', [App\Http\Controllers\Backend\GalleryController::class, 'status'])->name('galleryStatus');
         Route::get('about/{id}/change-status', [App\Http\Controllers\Backend\AboutController::class, 'status'])->name('aboutStatus');
         Route::get('content/{id}/change-status', [App\Http\Controllers\Backend\ContentController::class, 'status'])->name('contentStatus');
@@ -47,6 +49,8 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
         Route::get('/useful-link/{id}/change-status', [\App\Http\Controllers\Backend\UsefulLinkController::class, 'status'])->name('statusLink');
     });
     Route::group(['name' => 'delete'], function () {
+Route::get('writer/{id}/delete',[App\Http\Controllers\Backend\WriterController::class,'delete'])->name('writerDelete');
+
         Route::get('gallery/{id}/delete', [App\Http\Controllers\Backend\GalleryController::class, 'delete'])->name('galleryDelete');
         Route::get('about/{id}/delete', [App\Http\Controllers\Backend\AboutController::class, 'delete'])->name('aboutDelete');
         Route::get('content/{id}/delete', [App\Http\Controllers\Backend\ContentController::class, 'delete'])->name('contentDelete');
@@ -65,6 +69,8 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
         Route::get('/useful-links/{id}/delete', [\App\Http\Controllers\Backend\UsefulLinkController::class, 'delete'])->name('delLinks');
     });
     Route::group(['name' => 'resource'], function () {
+Route::resource('/writer',App\Http\Controllers\Backend\WriterController::class);
+
         Route::resource('/gallery', App\Http\Controllers\Backend\GalleryController::class);
         Route::resource('/content', App\Http\Controllers\Backend\ContentController::class);
         Route::resource('/categories', BCategory::class);

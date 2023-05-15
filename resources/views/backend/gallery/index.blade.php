@@ -36,7 +36,7 @@
                             @foreach($gallerys as $gallery)
                                 <tr>
                                     <td>{{ $gallery->id }}</td>
-                                    <td>{{ $gallery->translate('az')->name ?? '-' }}</td>
+                                    <td>{{ $gallery->translate('az')->name ?? __('backend.translation-not-found') }}</td>
                                     <td>{{ date('d.m.Y H:i:s',strtotime($gallery->created_at)) }}</td>
                                     <td class="text-center">
                                         <a class="btn btn-primary"

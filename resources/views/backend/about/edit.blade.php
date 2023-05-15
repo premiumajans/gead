@@ -26,7 +26,7 @@
                                                         <input name="title[{{ $lan->code }}]" type="text"
                                                                class="form-control"
                                                                required=""
-                                                               value="{{ $about->translate(app()->getLocale())->title ?? '-' }}">
+                                                               value="{{ $about->translate(app()->getLocale())->title ?? __('backend.translation-not-found') }}">
                                                         {!! validation_response('backend.title') !!}
                                                     </div>
                                                     <div class="mb-3">
@@ -35,7 +35,7 @@
                                                         <textarea name="description[{{ $lan->code }}]" type="text"
                                                                   class="form-control"
                                                                   id="elm{{$lan->code}}1"
-                                                                  required="">{!! $about->translate(app()->getLocale())->description ?? '-' !!}</textarea>
+                                                                  required="">{!! $about->translate(app()->getLocale())->description ?? __('backend.translation-not-found') !!}</textarea>
                                                         {!! validation_response('backend.description') !!}
                                                     </div>
                                                 </div>
