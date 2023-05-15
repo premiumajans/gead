@@ -21,6 +21,15 @@ class ContentController extends Controller
             return response()->json('content-is-empty');
         }
     }
+    public function show($id){
+        if (Content::where('id', $id)->exists()) {
+            $content = Content::where('id', $id)->first();
+            $content->increment('view');
+            return response()->json($content);
+        } else {
+            return response()->json('content-is-empty');
+        }
+    }
 
     public function altCat($cat_id, $alt_id)
     {

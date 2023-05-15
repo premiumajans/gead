@@ -31,3 +31,4 @@ Route::get('content/{id}', [\App\Http\Controllers\Api\ContentController::class, 
 Route::get('content/{cat_id}/{alt_id}', [\App\Http\Controllers\Api\ContentController::class, 'altCat']);
 Route::get('content/{cat_id}/{alt_id}/{sub_id}', [\App\Http\Controllers\Api\ContentController::class, 'subAltCat']);
 
+Route::get('/search/{keyword}', [\App\Http\Controllers\Api\SearchController::class, 'search']);

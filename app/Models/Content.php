@@ -14,7 +14,7 @@ class Content extends Model implements TranslatableContract
     use Translatable, LogsActivity;
 
     public $translatedAttributes = ['name', 'content'];
-    protected $fillable = ['slug', 'view', 'photo'];
+    protected $guarded = ['slug', 'view', 'photo'];
 
     public function photos()
     {
