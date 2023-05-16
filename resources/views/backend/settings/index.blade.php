@@ -27,11 +27,7 @@
                                 <th>ID</th>
                                 <th>@lang('backend.name'):</th>
                                 <th>@lang('backend.link'):</th>
-                                <th>@lang('backend.time'):</th>
-                                <th>@lang('backend.status'):</th>
-                                @canany(['settings edit','settings delete'])
                                 <th>@lang('backend.actions'):</th>
-                                @endcan
                             </tr>
                         </thead>
                         <tbody>
@@ -40,27 +36,7 @@
                                 <td class="text-center">{{ $setting->id }}</td>
                                 <td class="text-center">{{ $setting->name }}</td>
                                 <td class="text-center">{{ $setting->link }}</td>
-                                <td>{{ date('d.m.Y H:i:s',strtotime($setting->created_at))}}</td>
-                                <td class="text-center">
-                                    <a href="{{ route('backend.settingStatus',['id'=>$setting->id]) }}" title="@lang('backend.status')">
-                                        <input type="checkbox" id="switch" switch="primary" {{ $setting->status == 1 ? 'checked' : '' }} />
-                                        <label for="switch4"></label>
-                                    </a>
-                                </td>
-                                @canany(['settings edit','settings delete'])
-                                <td class="text-center">
-                                    @can('settings edit')
-                                    <a class="btn btn-primary" href={{ route('backend.settings.edit',['setting'=>$setting->id]) }}>
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    @endcan
-                                    @can('settings delete')
-                                    <a class="btn btn-danger" href="{{ route('backend.delSetting',['id'=>$setting->id]) }}">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                    @endcan
-                                </td>
-                                @endcan
+                                @include('backend.templates.components.dt-settings',['variable' => 'settings','value' => $setting])
                             </tr>
                             @endforeach
                         </tbody>

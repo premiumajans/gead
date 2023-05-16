@@ -36,21 +36,23 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
     Route::get('gallery/photos/{id}/delete', [\App\Http\Controllers\Backend\GalleryController::class, 'photosDelete'])->name('gallery.photos.delete');
     Route::post('gallery/{id}/photos/store', [\App\Http\Controllers\Backend\GalleryController::class, 'photosStore'])->name('gallery.photos.store');
     Route::group(['name' => 'status'], function () {
-Route::get('writer/{id}/change-status',[App\Http\Controllers\Backend\WriterController::class,'status'])->name('writerStatus');
-
+        Route::get('video/{id}/change-status', [App\Http\Controllers\Backend\VideoController::class, 'status'])->name('videoStatus');
+        Route::get('writer/{id}/change-status', [App\Http\Controllers\Backend\WriterController::class, 'status'])->name('writerStatus');
+        Route::get('writer/{id}/change-status', [App\Http\Controllers\Backend\WriterController::class, 'status'])->name('writerStatus');
         Route::get('gallery/{id}/change-status', [App\Http\Controllers\Backend\GalleryController::class, 'status'])->name('galleryStatus');
         Route::get('about/{id}/change-status', [App\Http\Controllers\Backend\AboutController::class, 'status'])->name('aboutStatus');
         Route::get('content/{id}/change-status', [App\Http\Controllers\Backend\ContentController::class, 'status'])->name('contentStatus');
         Route::get('/site-language/{id}/change-status', [BSiteLan::class, 'siteLanStatus'])->name('siteLanStatus');
         Route::get('/categories/{id}/change-status', [BCategory::class, 'categoryStatus'])->name('categoryStatus');
-        Route::get('/settings/{id}/change-status', [BSetting::class, 'settingStatus'])->name('settingStatus');
+        Route::get('/settings/{id}/change-status', [BSetting::class, 'settingStatus'])->name('settingsStatus');
         Route::get('/seo/{id}/change-status', [BMeta::class, 'seoStatus'])->name('seoStatus');
         Route::get('/slider/{id}/change-status', [BSlider::class, 'sliderStatus'])->name('sliderStatus');
         Route::get('/useful-link/{id}/change-status', [\App\Http\Controllers\Backend\UsefulLinkController::class, 'status'])->name('statusLink');
     });
     Route::group(['name' => 'delete'], function () {
-Route::get('writer/{id}/delete',[App\Http\Controllers\Backend\WriterController::class,'delete'])->name('writerDelete');
-
+        Route::get('video/{id}/delete', [App\Http\Controllers\Backend\VideoController::class, 'delete'])->name('videoDelete');
+        Route::get('writer/{id}/delete', [App\Http\Controllers\Backend\WriterController::class, 'delete'])->name('writerDelete');
+        Route::get('writer/{id}/delete', [App\Http\Controllers\Backend\WriterController::class, 'delete'])->name('writerDelete');
         Route::get('gallery/{id}/delete', [App\Http\Controllers\Backend\GalleryController::class, 'delete'])->name('galleryDelete');
         Route::get('about/{id}/delete', [App\Http\Controllers\Backend\AboutController::class, 'delete'])->name('aboutDelete');
         Route::get('content/{id}/delete', [App\Http\Controllers\Backend\ContentController::class, 'delete'])->name('contentDelete');
@@ -58,10 +60,10 @@ Route::get('writer/{id}/delete',[App\Http\Controllers\Backend\WriterController::
         Route::get('/site-languages/{id}/delete', [BSiteLan::class, 'delSiteLang'])->name('delSiteLang');
         Route::get('/categories/{id}/delete', [BCategory::class, 'delCategory'])->name('delCategory');
         Route::get('/contact-us/{id}/delete', [BContact::class, 'delContactUS'])->name('delContactUS');
-        Route::get('/settings/{id}/delete', [BSetting::class, 'delSetting'])->name('delSetting');
+        Route::get('/settings/{id}/delete', [BSetting::class, 'delSetting'])->name('settingsDelete');
         Route::get('/users/{id}/delete', [BAdmin::class, 'delAdmin'])->name('delAdmin');
         Route::get('/seo/{id}/delete', [BMeta::class, 'delSeo'])->name('delSeo');
-        Route::get('/slider/{id}/delete', [BSlider::class, 'delSlider'])->name('delSlider');
+        Route::get('/slider/{id}/delete', [BSlider::class, 'delSlider'])->name('sliderDelete');
         Route::get('/report/{id}/delete', [BReport::class, 'delReport'])->name('delReport');
         Route::get('/report/clean-all', [BReport::class, 'cleanAllReport'])->name('cleanAllReport');
         Route::get('/permission/{id}/delete', [BPermission::class, 'delPermission'])->name('delPermission');
@@ -69,8 +71,9 @@ Route::get('writer/{id}/delete',[App\Http\Controllers\Backend\WriterController::
         Route::get('/useful-links/{id}/delete', [\App\Http\Controllers\Backend\UsefulLinkController::class, 'delete'])->name('delLinks');
     });
     Route::group(['name' => 'resource'], function () {
-Route::resource('/writer',App\Http\Controllers\Backend\WriterController::class);
-
+        Route::resource('/video', App\Http\Controllers\Backend\VideoController::class);
+        Route::resource('/writer', App\Http\Controllers\Backend\WriterController::class);
+        Route::resource('/writer', App\Http\Controllers\Backend\WriterController::class);
         Route::resource('/gallery', App\Http\Controllers\Backend\GalleryController::class);
         Route::resource('/content', App\Http\Controllers\Backend\ContentController::class);
         Route::resource('/categories', BCategory::class);
@@ -90,7 +93,7 @@ Route::resource('/writer',App\Http\Controllers\Backend\WriterController::class);
 Route::fallback(function () {
     return view('backend.errors.404');
 });
-Route::group(['name' => 'auth'],function (){
+Route::group(['name' => 'auth'], function () {
     Route::get('/login', [BAuth::class, 'showLoginForm'])->name('login');
     Route::post('loginAdmin', [BAuth::class, 'login'])->name('loginPost');
     Route::post('logout', [BAuth::class, 'logout'])->name('logout');

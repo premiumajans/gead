@@ -16,9 +16,9 @@ class ContentController extends Controller
     public function index()
     {
         if (Content::where('status', 1)->exists()) {
-            return response()->json(['content' => Content::where('status', 1)->get()]);
+            return response()->json(['content' => Content::where('status', 1)->get()], 200);
         } else {
-            return response()->json(['content' => 'content-is-empty']);
+            return response()->json(['content' => 'content-is-empty'], 404);
         }
     }
 
@@ -43,9 +43,9 @@ class ContentController extends Controller
             return response()->json([
                 'content' => $content,
                 'related' => $related,
-            ]);
+            ], 200);
         } else {
-            return response()->json(['content' => 'content-is-empty']);
+            return response()->json(['content' => 'content-is-empty'], 404);
         }
     }
 

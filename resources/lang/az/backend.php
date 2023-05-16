@@ -1,6 +1,4 @@
-<?php
-
-return array (
+<?php return array (
   'about' => 'Haqqımızda',
   'actions' => 'Hərəkətlər',
   'active' => 'Aktiv',
@@ -87,7 +85,7 @@ return array (
   'follow-us' => 'Bizi izləyin',
   'forgot-password' => 'Şifrəni unutmusunuz?',
   'front_photo' => 'Ön şəkil',
-  'gallery' => 'Qaleriya',
+  'gallery' => 'Foto Qaleriya',
   'gead' => 'Gead',
   'gefen' => 'Gefen',
   'gefen-company' => 'GEFEN Company',
@@ -203,6 +201,7 @@ return array (
   'users' => 'İstifadəçilər',
   'vacancies' => 'Vakansiyalar',
   'vacancy' => 'Vakansiya',
+  'video' => 'Video Qaleriya',
   'views' => 'Izlənmə',
   'voen' => 'Vöen',
   'why-gefen' => 'Niyə GEFEN',
@@ -215,4 +214,5 @@ return array (
   'you-have-new-order' => 'Yeni sifarişiniz var',
   'your-item-message' => 'Elanınız nəzərdən keçirilməsini gözləyir.Elanı redaktə etmək və silmək üçün elanın nömrəsini yadda saxlayın.',
   'your-item-number' => 'Elanınızın nömrəsi',
+  'slider-order' => '',
 );

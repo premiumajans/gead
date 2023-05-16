@@ -12,9 +12,10 @@
                     <label for="switch4"></label>
                 </a>
             </div>
-            <a class="dropdown-item" href="{{ route('backend.'.$variable.'.edit',[$variable=>$value->id]) }}">@lang('backend.edit')</a>
-            <a class="dropdown-item text-red"
+            <a class="dropdown-item" href="{{ route('backend.'.$variable.'.edit',[\Illuminate\Support\Str::singular($variable) => $value->id]) }}">@lang('backend.edit')</a>
+            <a class="dropdown-item text-danger"
                href="{{ route('backend.'.$variable.'Delete',['id'=> $value->id]) }}">@lang('backend.delete')</a>
+            <a class="dropdown-item text-red">{{ date('d.m.Y H:i:s',strtotime($value->created_at))}}</a>
         </div>
     </div>
 </td>

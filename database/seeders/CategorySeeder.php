@@ -132,6 +132,15 @@ class CategorySeeder extends Seeder
                         'vacancies' => ['translations' => ['az' => 'Vakansiyalar', 'en' => 'Vacancies', 'ru' => 'Вакансии']],
                     ],
             ],
+            'sections' => [
+                'translations' => ['az' => 'Bölmələr', 'en' => 'Sections', 'ru' => 'Разделы'],
+                'categories' =>
+                    [
+                        'activities' => ['translations' => ['az' => 'Fəaliyyətlərimiz', 'en' => 'Activities', 'ru' => 'Наша деятельность']],
+                        'interviews' => ['translations' => ['az' => 'Müsahibələr', 'en' => 'Interviews', 'ru' => 'Интервью']],
+                        'seminars' => ['translations' => ['az' => 'Seminarlarımız', 'en' => 'Seminars', 'ru' => 'Cеминары']],
+                    ],
+            ],
         ];
         foreach ($categories as $key => $category) {
             $cat = new Category();
@@ -156,7 +165,7 @@ class CategorySeeder extends Seeder
                     $trans2->name = $altLang2;
                     $trans2->save();
                 }
-                if(array_key_exists('alt-categories',$category1)){
+                if (array_key_exists('alt-categories', $category1)) {
                     foreach ($category1['alt-categories'] as $subCatKey => $subCat) {
                         $subCatOriginal = new SubCategory();
                         $subCatOriginal->slug = $subCatKey;

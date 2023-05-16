@@ -1,5 +1,5 @@
 @extends('master.backend')
-@section('title',__('backend.selection'))
+@section('title',__('backend.video'))
 @section('styles')
     @include('backend.templates.components.dt-styles')
 @endsection
@@ -11,8 +11,8 @@
                     <div class="card-body">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0">@lang('backend.selection'):</h4>
-                                <a href="{{ route('backend.selection.create') }}" class="btn btn-primary mb-3"><i
+                                <h4 class="mb-sm-0">@lang('backend.video'):</h4>
+                                <a href="{{ route('backend.video.create') }}" class="btn btn-primary mb-3"><i
                                         class="fas fa-plus"></i> &nbsp;@lang('backend.add-new')
                                 </a>
                             </div>
@@ -22,18 +22,20 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>@lang('backend.slug'):</th>
+                                <th>@lang('backend.photo'):</th>
+                                <th>@lang('backend.name'):</th>
                                 <th>@lang('backend.time'):</th>
                                 <th>@lang('backend.actions'):</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($selections as $selection)
+                            @foreach($videos as $video)
                                 <tr>
-                                    <td>{{ $selection->id }}</td>
-                                    <td>{{ $selection->slug }}</td>
-                                    <td>{{ date('d.m.Y H:i:s',strtotime($selection->created_at)) }}</td>
-                                    @include('backend.templates.components.dt-settings',['variable' => 'selection','value' => $value])
+                                    <td>{{ $video->id }}</td>
+                                    <td>{{ $video->slug }}</td>
+                                    <td>{{ $video->translate(app()->getLocale())->name ?? __('backend.translation-not-found') }}</td>
+                                    <td>{{ date('d.m.Y H:i:s',strtotime($video->created_at)) }}</td>
+                                    @include('backend.templates.components.dt-settings',['variable' => 'video','value' => $video])
                                 </tr>
                             @endforeach
                             </tbody>

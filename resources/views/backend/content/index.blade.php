@@ -23,7 +23,6 @@
                             <tr>
                                 <th>ID</th>
                                 <th>@lang('backend.name'):</th>
-                                <th>@lang('backend.time'):</th>
                                 <th>@lang('backend.actions'):</th>
                             </tr>
                             </thead>
@@ -32,7 +31,6 @@
                                 <tr>
                                     <td>{{ $content->id }}</td>
                                     <td>{{ $content->translate('az')->name ?? __('backend.translation-not-found') }}</td>
-                                    <td>{{ date('d.m.Y H:i:s',strtotime($content->created_at)) }}</td>
                                     @include('backend.templates.components.dt-settings',['variable' => 'content','value' => $content])
                                 </tr>
                             @endforeach
