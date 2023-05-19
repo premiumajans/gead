@@ -1,6 +1,4 @@
-<?php
-
-return array (
+<?php return array (
   'content' => '',
   'copyright' => 'Copyright',
   'gallery' => 'Photo Gallery',
@@ -13,4 +11,6 @@ return array (
   'translation-not-found' => 'Translation not found!',
   'video' => '',
   'writer' => '',
+  'mail' => '',
+  'mlist' => '',
 );

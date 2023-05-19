@@ -215,4 +215,6 @@
   'your-item-message' => 'Elanınız nəzərdən keçirilməsini gözləyir.Elanı redaktə etmək və silmək üçün elanın nömrəsini yadda saxlayın.',
   'your-item-number' => 'Elanınızın nömrəsi',
   'slider-order' => '',
+  'mail' => '',
+  'mlist' => '',
 );

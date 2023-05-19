@@ -215,4 +215,6 @@
   'your-item-number' => 'Elanınızın nömrəsi',
   'video' => '',
   'slider-order' => '',
+  'mail' => '',
+  'mlist' => '',
 );

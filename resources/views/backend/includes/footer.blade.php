@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="text-sm-end d-sm-block">
-                    <script>document.write(new Date().getFullYear())</script> © <a target="_blank" href="{{ env('app_url') }}">{{ env('APP_NAME') }}</a>
+                    <script>document.write(new Date().getFullYear())</script> © <a target="_blank" href="https://premium.az">Premium Advertising</a>
                 </div>
             </div>
         </div>

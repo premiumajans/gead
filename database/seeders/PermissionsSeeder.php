@@ -25,6 +25,7 @@ class PermissionsSeeder extends Seeder
             'news',
             'content',
             'gallery',
+            'writer',
         ];
         foreach ($permissions as $permission) {
             add_permission($permission);

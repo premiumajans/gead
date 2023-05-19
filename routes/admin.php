@@ -36,6 +36,26 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
     Route::get('gallery/photos/{id}/delete', [\App\Http\Controllers\Backend\GalleryController::class, 'photosDelete'])->name('gallery.photos.delete');
     Route::post('gallery/{id}/photos/store', [\App\Http\Controllers\Backend\GalleryController::class, 'photosStore'])->name('gallery.photos.store');
     Route::group(['name' => 'status'], function () {
+Route::get('mlist/{id}/change-status',[App\Http\Controllers\Backend\MlistController::class,'status'])->name('mlistStatus');
+
+Route::get('mlist/{id}/change-status',[App\Http\Controllers\Backend\MlistController::class,'status'])->name('mlistStatus');
+
+Route::get('mlist/{id}/change-status',[App\Http\Controllers\Backend\MlistController::class,'status'])->name('mlistStatus');
+
+Route::get('mlist/{id}/change-status',[App\Http\Controllers\Backend\MlistController::class,'status'])->name('mlistStatus');
+
+Route::get('mlist/{id}/change-status',[App\Http\Controllers\Backend\MlistController::class,'status'])->name('mlistStatus');
+
+Route::get('mlist/{id}/change-status',[App\Http\Controllers\Backend\MlistController::class,'status'])->name('mlistStatus');
+
+Route::get('mlist/{id}/change-status',[App\Http\Controllers\Backend\MlistController::class,'status'])->name('mlistStatus');
+
+Route::get('mlist/{id}/change-status',[App\Http\Controllers\Backend\MlistController::class,'status'])->name('mlistStatus');
+
+Route::get('mlist/{id}/change-status',[App\Http\Controllers\Backend\MlistController::class,'status'])->name('mlistStatus');
+
+Route::get('mail/{id}/change-status',[App\Http\Controllers\Backend\MailController::class,'status'])->name('mailStatus');
+
         Route::get('video/{id}/change-status', [App\Http\Controllers\Backend\VideoController::class, 'status'])->name('videoStatus');
         Route::get('writer/{id}/change-status', [App\Http\Controllers\Backend\WriterController::class, 'status'])->name('writerStatus');
         Route::get('writer/{id}/change-status', [App\Http\Controllers\Backend\WriterController::class, 'status'])->name('writerStatus');
@@ -50,6 +70,26 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
         Route::get('/useful-link/{id}/change-status', [\App\Http\Controllers\Backend\UsefulLinkController::class, 'status'])->name('statusLink');
     });
     Route::group(['name' => 'delete'], function () {
+Route::get('mlist/{id}/delete',[App\Http\Controllers\Backend\MlistController::class,'delete'])->name('mlistDelete');
+
+Route::get('mlist/{id}/delete',[App\Http\Controllers\Backend\MlistController::class,'delete'])->name('mlistDelete');
+
+Route::get('mlist/{id}/delete',[App\Http\Controllers\Backend\MlistController::class,'delete'])->name('mlistDelete');
+
+Route::get('mlist/{id}/delete',[App\Http\Controllers\Backend\MlistController::class,'delete'])->name('mlistDelete');
+
+Route::get('mlist/{id}/delete',[App\Http\Controllers\Backend\MlistController::class,'delete'])->name('mlistDelete');
+
+Route::get('mlist/{id}/delete',[App\Http\Controllers\Backend\MlistController::class,'delete'])->name('mlistDelete');
+
+Route::get('mlist/{id}/delete',[App\Http\Controllers\Backend\MlistController::class,'delete'])->name('mlistDelete');
+
+Route::get('mlist/{id}/delete',[App\Http\Controllers\Backend\MlistController::class,'delete'])->name('mlistDelete');
+
+Route::get('mlist/{id}/delete',[App\Http\Controllers\Backend\MlistController::class,'delete'])->name('mlistDelete');
+
+Route::get('mail/{id}/delete',[App\Http\Controllers\Backend\MailController::class,'delete'])->name('mailDelete');
+
         Route::get('video/{id}/delete', [App\Http\Controllers\Backend\VideoController::class, 'delete'])->name('videoDelete');
         Route::get('writer/{id}/delete', [App\Http\Controllers\Backend\WriterController::class, 'delete'])->name('writerDelete');
         Route::get('writer/{id}/delete', [App\Http\Controllers\Backend\WriterController::class, 'delete'])->name('writerDelete');
@@ -71,6 +111,26 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
         Route::get('/useful-links/{id}/delete', [\App\Http\Controllers\Backend\UsefulLinkController::class, 'delete'])->name('delLinks');
     });
     Route::group(['name' => 'resource'], function () {
+Route::resource('/mlist',App\Http\Controllers\Backend\MlistController::class);
+
+Route::resource('/mlist',App\Http\Controllers\Backend\MlistController::class);
+
+Route::resource('/mlist',App\Http\Controllers\Backend\MlistController::class);
+
+Route::resource('/mlist',App\Http\Controllers\Backend\MlistController::class);
+
+Route::resource('/mlist',App\Http\Controllers\Backend\MlistController::class);
+
+Route::resource('/mlist',App\Http\Controllers\Backend\MlistController::class);
+
+Route::resource('/mlist',App\Http\Controllers\Backend\MlistController::class);
+
+Route::resource('/mlist',App\Http\Controllers\Backend\MlistController::class);
+
+Route::resource('/mlist',App\Http\Controllers\Backend\MlistController::class);
+
+Route::resource('/mail',App\Http\Controllers\Backend\MailController::class);
+
         Route::resource('/video', App\Http\Controllers\Backend\VideoController::class);
         Route::resource('/writer', App\Http\Controllers\Backend\WriterController::class);
         Route::resource('/writer', App\Http\Controllers\Backend\WriterController::class);
