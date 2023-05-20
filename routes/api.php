@@ -35,6 +35,7 @@ Route::get('slider/{id}', [\App\Http\Controllers\Api\SliderController::class, 's
 Route::get('content', [\App\Http\Controllers\Api\ContentController::class, 'index']);
 Route::get('content/{id}', [\App\Http\Controllers\Api\ContentController::class, 'show']);
 Route::get('content-news', [\App\Http\Controllers\Api\ContentController::class, 'news']);
+Route::post('content-mail', [\App\Http\Controllers\Api\MailController::class, 'index']);
 
 Route::get('content/{cat_id}/{alt_id}', [\App\Http\Controllers\Api\ContentController::class, 'altCat']);
 Route::get('content/{cat_id}/{alt_id}/{sub_id}', [\App\Http\Controllers\Api\ContentController::class, 'subAltCat']);

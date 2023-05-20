@@ -2,7 +2,6 @@
     <div data-simplebar class="h-100">
         <div id="sidebar-menu">
             <ul class="metismenu list-unstyled" id="side-menu">
-                                {{ creation('Mlist','Mlist',false,false) }}
                 <li>
                     <a href="{{ route('backend.dashboard') }}" class="waves-effect">
                         <i class="ri-home-4-fill"></i>
@@ -26,6 +25,30 @@
                         </a>
                     </li>
                 @endcan
+                @can('categories index')
+                    <li>
+                        <a href="{{ route('backend.categories.index') }}" class="waves-effect">
+                            <i class="fas fa-bars"></i>
+                            <span>@lang('backend.categories')</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('categories index')
+                    <li>
+                        <a href="{{ route('backend.alt-categories.index') }}" class="waves-effect">
+                            <i class="fas fa-bars"></i>
+                            <span>@lang('backend.alt-categories')</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('categories index')
+                    <li>
+                        <a href="{{ route('backend.sub-categories.index') }}" class="waves-effect">
+                            <i class="fas fa-bars"></i>
+                            <span>@lang('backend.sub-categories')</span>
+                        </a>
+                    </li>
+                @endcan
                 @can('gallery index')
                     <li>
                         <a href="{{ route('backend.gallery.index') }}" class="waves-effect">
@@ -42,14 +65,6 @@
                         </a>
                     </li>
                 @endcan
-                @can('categories index')
-                    <li>
-                        <a href="{{ route('backend.categories.index') }}" class="waves-effect">
-                            <i class="fas fa-bars"></i>
-                            <span>@lang('backend.categories')</span>
-                        </a>
-                    </li>
-                @endcan
                 @can('writer index')
                     <li>
                         <a href="{{ route('backend.writer.index') }}" class="waves-effect">
@@ -63,6 +78,14 @@
                         <a href="{{ route('backend.useful-links.index') }}" class="waves-effect">
                             <i class="fas fa-link"></i>
                             <span>@lang('backend.useful-links')</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('mail index')
+                    <li>
+                        <a href="{{ route('backend.mail.index') }}" class="waves-effect">
+                            <i class="fas fa-mail-bulk"></i>
+                            <span>@lang('backend.mail')</span>
                         </a>
                     </li>
                 @endcan
@@ -98,13 +121,6 @@
                         </a>
                     </li>
                 @endcan
-                {{--                <li class="menu-title">@lang('backend.seo-settings')</li>--}}
-                {{--                <li>--}}
-                {{--                    <a href="{{ route('backend.seo.index') }}" class="waves-effect">--}}
-                {{--                        <i class="fas fa-tags"></i>--}}
-                {{--                        <span>@lang('backend.tags')</span>--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
                 <li class="menu-title">@lang('backend.ap-setting')</li>
                 @can('users index')
                     <li>

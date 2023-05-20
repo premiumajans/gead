@@ -26,6 +26,7 @@ class PermissionsSeeder extends Seeder
             'content',
             'gallery',
             'writer',
+            'video',
         ];
         foreach ($permissions as $permission) {
             add_permission($permission);
@@ -36,6 +37,8 @@ class PermissionsSeeder extends Seeder
             'newsletter index',
             'newsletter create',
             'newsletter delete',
+            'mail index',
+            'mail delete',
         ];
         foreach ($singlePermissions as $single) {
             $permission = new \Spatie\Permission\Models\Permission();

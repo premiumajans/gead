@@ -217,4 +217,5 @@
   'slider-order' => '',
   'mail' => '',
   'mlist' => '',
+  'test' => '',
 );

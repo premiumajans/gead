@@ -1,4 +1,6 @@
-<?php return array (
+<?php
+
+return array (
   'about' => 'Haqqımızda',
   'actions' => 'Hərəkətlər',
   'active' => 'Aktiv',
@@ -107,6 +109,7 @@
   'location' => 'Ünvan',
   'login' => 'Daxil ol',
   'logout' => 'Çıxış et',
+  'mail' => 'E-poçtlar',
   'max-age' => 'Maksimum yaş seçin',
   'max-salary' => 'Maksimum əmək haqqı seçin',
   'menus' => 'Menyular',
@@ -115,6 +118,7 @@
   'middle' => 'Orta',
   'min-age' => 'Minimum yaş seçin',
   'min-salary' => 'Minimum əmək haqqı seçin',
+  'mlist' => '',
   'most-view' => 'Ən çox izlənilənlər',
   'my-ads' => 'Payaşdığım elanlar',
   'my-company' => 'Şirkətim',
@@ -171,6 +175,7 @@
   'site-setting' => 'Sayt tənzimləmələri',
   'site-users' => 'Sayt istifadəçiləri',
   'slider' => 'Slayder',
+  'slider-order' => '',
   'slug' => 'Slug',
   'statistics' => 'Statistika',
   'status' => 'Status',
@@ -188,6 +193,7 @@
   'teams' => 'Komandalar',
   'teams-details' => 'Komanda Məlumatları',
   'teams-elements' => 'Komanda Elementləri',
+  'test' => '',
   'time' => 'Vaxt',
   'title' => 'Başlıq',
   'translation-not-found' => 'Tərcümə tapılmadı!',
@@ -214,7 +220,4 @@
   'you-have-new-order' => 'Yeni sifarişiniz var',
   'your-item-message' => 'Elanınız nəzərdən keçirilməsini gözləyir.Elanı redaktə etmək və silmək üçün elanın nömrəsini yadda saxlayın.',
   'your-item-number' => 'Elanınızın nömrəsi',
-  'slider-order' => '',
-  'mail' => '',
-  'mlist' => '',
 );
