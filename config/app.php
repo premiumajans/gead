@@ -56,7 +56,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
-
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
@@ -70,12 +69,10 @@ return [
         Laravolt\Avatar\ServiceProvider::class,
     ],
 
-
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'Avatar'    => Laravolt\Avatar\Facade::class,
-        'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
         'DotenvEditor' => Brotzka\DotenvEditor\DotenvEditorFacade::class,
 
     ])->toArray(),
