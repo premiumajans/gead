@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\CRUDHelper;
 use App\Models\Slider;
+use App\Models\SliderTranslation;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -13,51 +16,38 @@ class SliderController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('slider index'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        check_permission('slider index');
         $sliders = Slider::orderBy('order')->get();
         return view('backend.slider.index', get_defined_vars());
     }
 
     public function create()
     {
-        abort_if(Gate::denies('slider create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        check_permission('slider create');
         return view('backend.slider.create');
     }
 
     public function store(Request $request)
     {
-        abort_if(Gate::denies('slider create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        check_permission('slider create');
         try {
             if (empty(Slider::first())) {
                 $sliderOrder = 1;
             } else {
                 $sliderOrder = Slider::all()->last()->order + 1;
             }
-            Slider::create([
-                'photo' => upload('sliders', $request->file('photo')),
-                'alt' => $request->alt,
-                'order' => $sliderOrder,
-                'status' => 1,
-            ]);
-            alert()->success(__('messages.success'));
-            return redirect(route('backend.slider.index'));
-        } catch (Exception $e) {
-            alert()->error(__('messages.error'));
-            return redirect(route('backend.slider.index'));
-        }
-    }
-    public function update(Request $request, $id)
-    {
-        abort_if(Gate::denies('slider edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        try {
-            if ($request->hasFile('photo')) {
-                Slider::find($id)->update([
-                    'photo' => upload('sliders', $request->file('photo'))
-                ]);
+            $slider = new Slider();
+            $slider->photo = upload('sliders', $request->file('photo'));
+            $slider->alt = $request->alt;
+            $slider->order = $sliderOrder;
+            $slider->save();
+            foreach (active_langs() as $lang) {
+                $sliderTranslation = new SliderTranslation();
+                $sliderTranslation->locale = $lang->code;
+                $sliderTranslation->slider_id = $slider->id;
+                $sliderTranslation->title = $request->title[$lang->code];
+                $sliderTranslation->save();
             }
-            Slider::find($id)->update([
-                'alt' => $request->alt
-            ]);
             alert()->success(__('messages.success'));
             return redirect(route('backend.slider.index'));
         } catch (Exception $e) {
@@ -66,28 +56,42 @@ class SliderController extends Controller
         }
     }
 
-    public function edit(Slider $slider)
+    public function update(Request $request, $id)
     {
-        abort_if(Gate::denies('slider edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        check_permission('slider edit');
+        try {
+            $slider = Slider::find($id);
+            DB::transaction(function () use ($request, $slider) {
+                if ($request->hasFile('photo')) {
+                    if (file_exists($slider->photo)) {
+                        unlink(public_path($slider->photo));
+                    }
+                    $slider->photo = upload('sliders', $request->file('photo'));
+                }
+                foreach (active_langs() as $lang) {
+                    $slider->translate($lang->code)->title = $request->title[$lang->code];
+                }
+                $slider->alt = $request->alt;
+                $slider->save();
+            });
+            alert()->success(__('messages.success'));
+            return redirect(route('backend.slider.index'));
+        } catch (Exception $e) {
+            alert()->error(__('messages.error'));
+            return redirect(route('backend.slider.index'));
+        }
+    }
+
+    public function edit($id)
+    {
+        check_permission('slider edit');
+        $slider = Slider::find($id);
         return view('backend.slider.edit', get_defined_vars());
     }
 
-    public function delSlider($id)
-    {
-        abort_if(Gate::denies('slider delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        try {
-            unlink(Slider::find($id)->photo);
-            Slider::find($id)->delete();
-            alert()->success(__('messages.success'));
-            return redirect()->route('backend.slider.index');
-        } catch (\Exception $e) {
-            alert()->error(__('messages.error'));
-            return redirect()->route('backend.slider.index');
-        }
-    }
     public function sliderOrder(Request $request, $id)
     {
-        abort_if(Gate::denies('slider edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        check_permission('slider edit');
         try {
             $slider = Slider::find($id);
             $orders = [];
@@ -100,8 +104,7 @@ class SliderController extends Controller
                     'order' => $slider->order,
                 ]);
                 $slider->update(['order' => $orders[$prevKey]]);
-            }
-            else{
+            } else {
                 if ($slider->order == end($orders)) {
                     Slider::where('order', $orders[count($orders) - 2])->update([
                         'order' => $slider->order
@@ -128,14 +131,16 @@ class SliderController extends Controller
             return redirect(route('backend.slider.index'));
         }
     }
+
+    public function delSlider($id)
+    {
+        check_permission('slider delete');
+        return CRUDHelper::remove_item('\App\Models\Slider', $id);
+    }
+
     public function sliderStatus($id)
     {
-        $status = Slider::where('id', $id)->value('status');
-        if ($status == 1) {
-            Slider::where('id', $id)->update(['status' => 0]);
-        } else {
-            Slider::where('id', $id)->update(['status' => 1]);
-        }
-        return redirect()->route('backend.slider.index');
+        check_permission('slider edit');
+        return CRUDHelper::status('\App\Models\Slider', $id);
     }
 }

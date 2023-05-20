@@ -18,10 +18,8 @@ class DatabaseSeeder extends Seeder
             LanguageSeeder::class,
             PermissionsSeeder::class,
             MetaSeeder::class,
-            AboutSeeder::class,
             SettingSeeder::class,
             AdminSeeder::class,
-            WhyGefenSeeder::class,
             CategorySeeder::class,
         ]);
     }

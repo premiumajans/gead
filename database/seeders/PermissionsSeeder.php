@@ -11,6 +11,7 @@ class PermissionsSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'about',
             'slider',
             'categories',
             'languages',
@@ -20,8 +21,12 @@ class PermissionsSeeder extends Seeder
             'permissions',
             'report',
             'dodenv',
-            'usefulLink',
+            'UseFulLink',
             'news',
+            'content',
+            'gallery',
+            'writer',
+            'video',
         ];
         foreach ($permissions as $permission) {
             add_permission($permission);
@@ -29,11 +34,11 @@ class PermissionsSeeder extends Seeder
         $singlePermissions = [
             'contact index',
             'contact delete',
-            'about index',
-            'about delete',
             'newsletter index',
             'newsletter create',
             'newsletter delete',
+            'mail index',
+            'mail delete',
         ];
         foreach ($singlePermissions as $single) {
             $permission = new \Spatie\Permission\Models\Permission();

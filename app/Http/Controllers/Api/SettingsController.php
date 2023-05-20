@@ -11,12 +11,20 @@ class SettingsController extends Controller
     public function index()
     {
         $settings = Setting::where('status', 1)->get();
-        return response()->json($settings);
+        if (Setting::where('status', 1)->exists()) {
+            return response()->json(['settings' => $settings], 200);
+        } else {
+            return response()->json(['settings' => 'settings'], 404);
+        }
     }
 
-    public function show($id)
+    public function show($name)
     {
-        $setting = Setting::where('id', $id)->where('status', 1)->get();
-        return response()->json($setting);
+        if (Setting::where('name', $name)->where('status', 1)->exists()) {
+            $setting = Setting::where('name', $name)->where('status', 1)->first();
+            return response()->json(['setting' => $setting], 200);
+        } else {
+            return response()->json(['setting' => 'setting-not-found'], 404);
+        }
     }
 }

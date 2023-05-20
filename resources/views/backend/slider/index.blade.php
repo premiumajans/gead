@@ -30,32 +30,21 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Order:</th>
                                 <th>@lang('backend.photo'):</th>
-                                <th>@lang('backend.alt'):</th>
-                                <th>@lang('backend.time'):</th>
-                                <th>@lang('backend.status'):</th>
                                 <th>@lang('backend.actions'):</th>
+                                @if(count(\App\Models\Slider::all()) >1)
+                                    <th>@lang('backend.slider-order'):</th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($sliders as $slider)
                                 <tr>
                                     <td class="text-center">{{ $slider->id }}</td>
-                                    <td class="text-center">{{ $slider->order }}</td>
-                                    <td class="text-center"><img src="{{ asset($slider->photo) }}" width="100" height="50">
-                                    <td class="text-center">{{ $slider->alt }}</td>
-                                    <td>{{ date('d.m.Y H:i:s',strtotime($slider->created_at))}}</td>
+                                    <td class="text-center"><img src="{{ asset($slider->photo) }}" width="100"
+                                                                 height="50"></td>
+                                    @if(count(\App\Models\Slider::all()) >1)
                                     <td class="text-center">
-                                        <a href="{{ route('backend.sliderStatus',['id'=>$slider->id]) }}"
-                                           title="@lang('backend.status')">
-                                            <input type="checkbox" id="switch"
-                                                   switch="primary" {{ $slider->status == 1 ? 'checked' : '' }} />
-                                            <label for="switch4"></label>
-                                        </a>
-                                    </td>
-                                    <td class="text-center">
-                                        @if(count(\App\Models\Slider::all()) >1)
                                             <a class="btn btn-primary"
                                                href={{ route('backend.sliderOrder',['id'=>$slider->id,'direction' => 'down']) }}>
                                                 <i class="fas fa-arrow-@if($slider->order !=  \App\Models\Slider::orderBy('order','desc')->first()->order)down @elseif($slider->order ==  \App\Models\Slider::orderBy('order','desc')->first()->order)up @endif"></i>
@@ -66,16 +55,9 @@
                                                     <i class="fas fa-arrow-up"></i>
                                                 </a>
                                             @endif
-                                        @endif
-                                        <a class="btn btn-primary"
-                                           href={{ route('backend.slider.edit',['slider'=>$slider->id]) }}>
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a class="btn btn-danger"
-                                           href="{{ route('backend.delSlider',['id'=>$slider->id]) }}">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
                                     </td>
+                                    @endif
+                                    @include('backend.templates.components.dt-settings',['variable' => 'slider','value' => $slider])
                                 </tr>
                             @endforeach
                             </tbody>

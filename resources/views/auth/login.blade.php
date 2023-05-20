@@ -1,4 +1,4 @@
-<meta charset="utf-8" />
+<meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>@lang('backend.login')</title>
 @include('backend.includes.styles')
@@ -25,15 +25,6 @@
                             <div class="col-12">
                                 <input class="form-control text-muted" type="password" name="password" required=""
                                        placeholder="@lang('backend.password')">
-                            </div>
-                        </div>
-                        <div class="form-group mb-0 row">
-                            <div class="col-sm-6">
-                                <input type="checkbox" name="remember_me" class="custom-control-input" id="customCheck1">
-                                <label class="form-label ms-1 text-muted" for="customCheck1">@lang('backend.remember-me')</label>
-                            </div>
-                            <div class="col-sm-6 d-flex justify-content-end">
-                                <a href="#" class="text-muted">@lang('backend.forgot-password')</a>
                             </div>
                         </div>
                         <div class="form-group mb-3 text-center row mt-3 pt-1">

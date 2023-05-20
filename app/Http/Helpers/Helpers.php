@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\Artisan;
 if (!function_exists('upload')) {
     function upload($path, $file)
     {
-        if (!File::isDirectory(public_path('images/' . $path))) {
-            File::makeDirectory(public_path('images/' . $path), 0777, true, true);
-        }
         try {
+            if (!File::isDirectory(public_path('images/' . $path))) {
+                File::makeDirectory(public_path('images/' . $path), 0777, true, true);
+            }
             $filename = uniqid() . '.webp';
             Image::make($file)->resize(null, 800, function ($constraint) {
                 $constraint->aspectRatio();
@@ -27,11 +27,31 @@ if (!function_exists('upload')) {
     }
 }
 
+if (!function_exists('pdf_upload')) {
+    function pdf_upload($file)
+    {
+        try {
+            $img = $file;
+            $extension = $img->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $img->move('pdf', $filename);
+            $data['pdf'] = 'pdf/' . $filename;
+            return $data['pdf'];
+        } catch (Exception $e) {
+            return redirect()->back();
+        }
+    }
+}
+
+
 if (!function_exists('multi_upload')) {
     function multi_upload($path, $files): array|\Illuminate\Http\RedirectResponse
     {
         try {
             $result = [];
+            if (!File::isDirectory(public_path('images/' . $path))) {
+                File::makeDirectory(public_path('images/' . $path), 0777, true, true);
+            }
             foreach ($files as $file) {
                 $filename = uniqid() . '.webp';
                 Image::make($file)->resize(null, 800, function ($constraint) {
@@ -43,7 +63,33 @@ if (!function_exists('multi_upload')) {
             return $result;
         } catch (Exception $e) {
             return redirect()->back();
+
         }
+    }
+}
+
+if (!function_exists('creation')) {
+    function creation($name, $modelName = null, $translateModel = false,$photoModel = false)
+    {
+        Artisan::call('make:controller Backend/' . $name . 'Controller --resource');
+        Artisan::call('create-status-route ' . Str::lower($name) . ' ' . $name);
+        Artisan::call('create-delete-route ' . Str::lower($name) . ' ' . $name);
+        Artisan::call('create-resource-route ' . Str::lower($name) . ' ' . $name);
+        Artisan::call('make:controller Api/' . $name . 'Controller');
+        $permissionSeederCommand = "sed -i \"s/\\\$permissions = \\\[/\\\$permissions = \\\[\\n        '".Str::lower($name)."',/\" database/seeders/PermissionsSeeder.php";
+        exec($permissionSeederCommand);
+        if ($modelName != null) {
+            Artisan::call('make:model ' . $modelName . ' -m');
+        }
+        if ($translateModel) {
+            Artisan::call('make:model ' . $modelName . 'Translation -m');
+        }
+        if ($translateModel) {
+            Artisan::call('make:model ' . $modelName . 'Photos -m');
+        }
+        add_permission(Str::lower($name));
+        Artisan::call('app:create-blade ' . Str::lower($name));
+        Artisan::call('translation:add ' . Str::lower($name));
     }
 }
 
@@ -52,23 +98,6 @@ if (!function_exists('check_permission')) {
     {
         return abort_if(Gate::denies($permission_name), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-    }
-}
-
-if (!function_exists('creation')) {
-    function creation($name, $modelName = null,$translateModel = false)
-    {
-        Artisan::call('make:controller Backend/' . $name.'Controller --resource');
-        Artisan::call('make:controller Api/' . $name.'Controller');
-        if ($modelName != null) {
-            Artisan::call('make:model ' . $modelName . ' -m');
-        }
-        if ($translateModel) {
-            Artisan::call('make:model ' . $modelName . 'Translation -m');
-        }
-        add_permission(Str::lower($name));
-        Artisan::call('app:create-blade '.Str::lower($name));
-        Artisan::call('translation:add '.Str::lower($name));
     }
 }
 

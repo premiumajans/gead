@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Str;
+use Illuminate\Support\Str;
 
 class AddTranslationKey extends Command
 {
@@ -21,7 +21,7 @@ class AddTranslationKey extends Command
                 continue;
             }
             $langCode = basename($langDir);
-            $langFile = $langDir . '\\backend.php';
+            $langFile = $langDir . '/backend.php';
             $langData = require $langFile;
             if (! isset($langData[$key])) {
                 $langData[$key] = '';

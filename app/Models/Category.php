@@ -14,6 +14,7 @@ class Category extends Model implements TranslatableContract
     public $translatedAttributes = ['name'];
     protected $fillable = ['slug'];
 
+
     public function alt()
     {
         return $this->hasMany(AltCategory::class);

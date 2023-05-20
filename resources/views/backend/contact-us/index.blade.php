@@ -42,9 +42,7 @@
                                     <a class="btn btn-primary" href="{{ route('backend.readContact',['id'=>$contact->id]) }}">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a class="btn btn-danger" href="{{ route('backend.delContactUS',['id'=>$contact->id]) }}">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
+                                    {!! admin_delete('backend.delContactUS',$contact->id) !!}
                                 </td>
                             </tr>
                             @endforeach

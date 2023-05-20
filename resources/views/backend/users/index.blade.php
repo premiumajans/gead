@@ -36,8 +36,6 @@
                                 <th>@lang('backend.name'):</th>
                                 <th>@lang('backend.email'):</th>
                                 <th>@lang('backend.time')</th>
-                                <th>@lang('backend.status'):</th>
-                                <th>@lang('backend.last-seen'):</th>
                                 @can('users delete')<th>@lang('backend.actions'):</th>@endcan
                             </tr>
                             </thead>
@@ -48,24 +46,12 @@
                                     <td class="text-center">{{ $user->name }}</td>
                                     <td class="text-center">{{ $user->email }}</td>
                                     <td>{{ date('d.m.Y H:i:s',strtotime($user->created_at))}}</td>
-                                    <td class="text-center">
-                                        @if(Cache::has('user-is-online-' . $user->id))
-                                            <span class="text-success">Online</span>
-                                        @else
-                                            <span class="text-secondary">Offline</span>
-                                        @endif
-                                    </td>
-                                    <td class="text-center">
-                                        @if(Cache::has('user-is-online-' . $user->id))
-                                            <span class="text-success">@lang('backend.online-now')</span>
-                                        @elseif(empty($user->last_seen))
-                                            <span class="text-danger">@lang('backend.dont-seen-first')</span>
-                                        @else
-                                            {{ date('d.m.Y H:i:s', strtotime($user->last_seen))}}
-                                        @endif
-                                    </td>
                                     @can('users delete')
                                     <td class="text-center">
+                                        <a class="btn btn-primary" title="@lang('backend.delete')"
+                                           href="{{ route('backend.giveUserPermission',['user'=>$user->id]) }}">
+                                            <i class="fas fa-key"></i>
+                                        </a>
                                         @if($user->id != auth()->user()->id)
                                             <a class="btn btn-danger" title="@lang('backend.delete')"
                                                href="{{ route('backend.delAdmin',['id'=>$user->id]) }}">

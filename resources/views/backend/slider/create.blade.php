@@ -5,48 +5,41 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-xl-8">
+                <div class="col-xl-9">
                     <div class="card">
-                        <div class="card-body">
-                            <div class="col-12">
-                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0">@lang('backend.slider'): @lang('backend.add-new')</h4>
+                        <form action="{{ route('backend.slider.store') }}" class="needs-validation" novalidate method="post"
+                              enctype="multipart/form-data">
+                            @csrf
+                            <div class="card-body">
+                                @include('backend.templates.components.card-col-12',['variable' => 'slider'])
+                                @include('backend.templates.components.multi-lan-tab')
+                                <div class="tab-content p-3 text-muted">
+                                    @foreach(active_langs() as $lan)
+                                        <div class="tab-pane @if($loop->first) active show @endif" id="{{ $lan->code }}"
+                                             role="tabpanel">
+                                            <div class="form-group row">
+                                                <div class="mb-3">
+                                                    <label>@lang('backend.title') <span class="text-danger">*</span></label>
+                                                    <input name="title[{{ $lan->code }}]" type="text" class="form-control"
+                                                           required="" placeholder="@lang('backend.title')">
+                                                    {!! validation_response('backend.title') !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                        <div class="mb-3">
+                                            <label>@lang('backend.photo') <span class="text-danger">*</span></label>
+                                            <input type="file" name="photo" class="form-control" required="" id="validationCustom">
+                                           {!! validation_response('backend.photo') !!}
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>@lang('backend.alt') <span class="text-danger">*</span></label>
+                                            <input type="text" name="alt" class="form-control" id="validationCustom"  placeholder="@lang('backend.alt')">
+                                        </div>
                                 </div>
                             </div>
-                            <form action="{{ route('backend.slider.store') }}" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
-                                @csrf
-                                <div class="mb-3">
-                                    <label>@lang('backend.photo') <span class="text-danger">*</span></label>
-                                    <input type="file" name="photo" class="form-control" required="" id="validationCustom">
-                                    <div class="valid-feedback">
-                                        @lang('backend.photo') @lang('messages.is-correct')
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        @lang('backend.photo') @lang('messages.not-correct')
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label>@lang('backend.alt') <span class="text-danger">*</span></label>
-                                    <input type="text" name="alt" class="form-control" required="" id="validationCustom"  placeholder="@lang('backend.alt')">
-                                    <div class="valid-feedback">
-                                        @lang('backend.alt') @lang('messages.is-correct')
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        @lang('backend.alt') @lang('messages.not-correct')
-                                    </div>
-                                </div>
-                                <div class="mb-0 text-center">
-                                    <div>
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
-                                            @lang('backend.submit')
-                                        </button>
-                                        <a href="{{url()->previous()}}" type="button" class="btn btn-secondary waves-effect">
-                                            @lang('backend.cancel')
-                                        </a>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                            @include('backend.templates.components.buttons')
+                        </form>
                     </div>
                 </div>
             </div>

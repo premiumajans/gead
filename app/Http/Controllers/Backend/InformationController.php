@@ -42,7 +42,7 @@ class InformationController extends Controller
             return redirect()->back();
         } catch (Exception $e) {
             alert()->error(__('messages.error') . $e);
-            return redirect()->route('backend.my-informations.index');
+            return redirect()->route('backend.informations.index');
         }
     }
 }
