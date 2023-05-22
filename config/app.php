@@ -74,7 +74,6 @@ return [
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'Avatar'    => Laravolt\Avatar\Facade::class,
         'DotenvEditor' => Brotzka\DotenvEditor\DotenvEditorFacade::class,
-
     ])->toArray(),
 
 ];

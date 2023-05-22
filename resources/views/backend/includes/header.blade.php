@@ -29,7 +29,6 @@
                     @endif
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
-
                     <a href="{{ route('backend.switchLang','az') }}" class="dropdown-item notify-item">
                         <img src="{{ asset('backend/images/flags/az.png')}}" class="me-1" height="12">
                         <span class="align-middle">Azərbaycan</span>
