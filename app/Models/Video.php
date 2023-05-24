@@ -13,12 +13,7 @@ class Video extends Model implements TranslatableContract
     use Translatable, LogsActivity;
 
     public $translatedAttributes = ['name'];
-    protected $fillable = ['photo','status'];
-
-    public function video()
-    {
-        return $this->hasMany(VideoPhotos::class);
-    }
+    protected $fillable = ['link', 'status'];
 
     public function getActivitylogOptions(): LogOptions
     {
