@@ -22,8 +22,7 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>@lang('backend.photo'):</th>
-                                <th>@lang('backend.name'):</th>
+                                <th>@lang('backend.link'):</th>
                                 <th>@lang('backend.time'):</th>
                                 <th>@lang('backend.actions'):</th>
                             </tr>
@@ -32,8 +31,9 @@
                             @foreach($videos as $video)
                                 <tr>
                                     <td>{{ $video->id }}</td>
-                                    <td>{{ $video->slug }}</td>
-                                    <td>{{ $video->translate(app()->getLocale())->name ?? __('backend.translation-not-found') }}</td>
+                                    <td>
+                                        {!! $video->link !!}
+                                    </td>
                                     <td>{{ date('d.m.Y H:i:s',strtotime($video->created_at)) }}</td>
                                     @include('backend.templates.components.dt-settings',['variable' => 'video','value' => $video])
                                 </tr>
