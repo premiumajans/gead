@@ -37,6 +37,7 @@ class ContentController extends Controller
             if ($request->hasFile('photo')) {
                 $content->photo = upload('content', $request->file('photo'));
             }
+            $content->register = $request->register;
             $content->category_id = $request->category;
             $content->alt_id = $request->altCategory;
             $content->sub_id = $request->subCategory;

@@ -8,12 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Video extends Model implements TranslatableContract
+class Video extends Model
 {
-    use Translatable, LogsActivity;
+    use LogsActivity;
 
-    public $translatedAttributes = ['name'];
-    protected $fillable = ['link', 'status'];
+    protected $guarded = [];
 
     public function getActivitylogOptions(): LogOptions
     {

@@ -12,6 +12,8 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
     Route::get('give-permission', [App\Http\Controllers\Backend\PermissionController::class, 'givePermission'])->name('givePermission');
     Route::get('give-permission-to-user/{user}', [App\Http\Controllers\Backend\PermissionController::class, 'giveUserPermission'])->name('giveUserPermission');
     Route::get('contact-us/{id}/read', [App\Http\Controllers\Backend\ContactController::class, 'readContact'])->name('readContact');
+    Route::get('appeals/{id}/read', [App\Http\Controllers\Backend\AppealsController::class, 'show'])->name('readAppeal');
+
     Route::post('give-permission-to-user-update', [App\Http\Controllers\Backend\PermissionController::class, 'giveUserPermissionUpdate'])->name('givePermissionUserUpdate');
     Route::get('slider/{id}/change-order', [App\Http\Controllers\Backend\SliderController::class, 'sliderOrder'])->name('sliderOrder');
     Route::get('newsletter/history', [App\Http\Controllers\Backend\NewsletterController::class, 'newsletterHistory'])->name('newsletterHistory');
@@ -23,7 +25,7 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
     Route::group(['name' => 'status'], function () {
         Route::get('mail/{id}/change-status', [App\Http\Controllers\Backend\MailController::class, 'status'])->name('mailStatus');
         Route::get('alt-categories/{id}/change-status', [App\Http\Controllers\Backend\AltCategoryController::class, 'status'])->name('alt-categoriesStatus');
-        Route::get('sub-categories/{id}/change-status', [App\Http\Controllers\Backend\SuApp\Http\Controllers\Backend\CategoryControllerController::class, 'status'])->name('sub-categoriesStatus');
+        Route::get('sub-categories/{id}/change-status', [App\Http\Controllers\Backend\CategoryController::class, 'status'])->name('sub-categoriesStatus');
         Route::get('video/{id}/change-status', [App\Http\Controllers\Backend\VideoController::class, 'status'])->name('videoStatus');
         Route::get('writer/{id}/change-status', [App\Http\Controllers\Backend\WriterController::class, 'status'])->name('writerStatus');
         Route::get('gallery/{id}/change-status', [App\Http\Controllers\Backend\GalleryController::class, 'status'])->name('galleryStatus');
@@ -59,7 +61,9 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
         Route::get('/report/clean-all', [App\Http\Controllers\Backend\ReportController::class, 'cleanAllReport'])->name('cleanAllReport');
         Route::get('/permission/{id}/delete', [App\Http\Controllers\Backend\PermissionController::class, 'delPermission'])->name('delPermission');
         Route::get('/newsletter/{id}/delete', [App\Http\Controllers\Backend\NewsletterController::class, 'delNewsletter'])->name('delNewsletter');
-        Route::get('/useful-links/{id}/delete', [\App\Http\Controllers\Backend\UsefulLinkController::class, 'delete'])->name('delLinks');
+        Route::get('/useful-links/{id}/delete', [App\Http\Controllers\Backend\UsefulLinkController::class, 'delete'])->name('delLinks');
+        Route::get('/appeals/{id}/delete', [App\Http\Controllers\Backend\AppealsController::class, 'delete'])->name('appealsDelete');
+
     });
     Route::group(['name' => 'resource'], function () {
         Route::resource('/mail', App\Http\Controllers\Backend\MailController::class);
@@ -81,6 +85,7 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'backend.'], function () {
         Route::resource('/slider', App\Http\Controllers\Backend\SliderController::class);
         Route::resource('/permissions', App\Http\Controllers\Backend\PermissionController::class);
         Route::resource('/useful-links', App\Http\Controllers\Backend\UsefulLinkController::class);
+        Route::resource('/appeals', App\Http\Controllers\Backend\AppealsController::class);
     });
 });
 Route::fallback(function () {

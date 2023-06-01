@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->string('category_id');
             $table->string('alt_id')->nullable();
             $table->string('sub_id')->nullable();
+            $table->string('register')->default(0);
             $table->string('pdf')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
