@@ -7,6 +7,7 @@ use App\Models\AltCategory;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Content;
+use App\Models\Register;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -19,6 +20,24 @@ class ContentController extends Controller
             return response()->json(['content' => Content::where('status', 1)->with('photos')->get()], 200);
         } else {
             return response()->json(['content' => 'content-is-empty'], 404);
+        }
+    }
+
+    public function register(Request $request, $id)
+    {
+        try {
+            $content = Content::where('id', $id)->with('register')->first();
+            $register = new Register();
+            $register->name = $request->name;
+            $register->surname = $request->surname;
+            $register->education = $request->education;
+            $register->work = $request->work;
+            $register->email = $request->email;
+            $register->phone = $request->phone;
+            $content->register()->save($register);
+            return response()->json(['register' => 'register-is-successful'], 200);
+        } catch (\Exception $exception) {
+            return response()->json(['content' => 'register-is-error'], 500);
         }
     }
 
@@ -61,9 +80,9 @@ class ContentController extends Controller
     public function subAltCat($cat_id, $alt_id, $sub_id)
     {
         if (Content::where('category_id', $cat_id)->where('alt_id', $alt_id)->where('sub_id', $sub_id)->exists()) {
-            return response()->json(['content' => Content::where('category_id', $cat_id)->where('alt_id', $alt_id)->where('sub_id', $sub_id)->with('photos')->get()],200);
+            return response()->json(['content' => Content::where('category_id', $cat_id)->where('alt_id', $alt_id)->where('sub_id', $sub_id)->with('photos')->get()], 200);
         } else {
-            return response()->json(['content' => 'content-is-empty'],404);
+            return response()->json(['content' => 'content-is-empty'], 404);
         }
     }
 
@@ -71,9 +90,9 @@ class ContentController extends Controller
     {
         $categoryId = Category::where('slug', 'news')->value('id');
         if (Content::where('category_id', $categoryId)->exists()) {
-            return response()->json(['news' => Content::where('category_id', $categoryId)->get()],200);
+            return response()->json(['news' => Content::where('category_id', $categoryId)->get()], 200);
         } else {
-            return response()->json(['news' => 'news-is-empty'],404);
+            return response()->json(['news' => 'news-is-empty'], 404);
         }
     }
 }

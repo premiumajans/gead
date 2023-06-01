@@ -17,6 +17,14 @@
                         </a>
                     </li>
                 @endcan
+                @can('content index')
+                    <li>
+                        <a href="{{ route('backend.appeals.index') }}" class="waves-effect">
+                            <i class="fas fa-users"></i>
+                            <span>@lang('backend.appeals')</span>
+                        </a>
+                    </li>
+                @endcan
                 @can('slider index')
                     <li>
                         <a href="{{ route('backend.slider.index') }}" class="waves-effect">

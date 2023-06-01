@@ -20,6 +20,10 @@ class Content extends Model implements TranslatableContract
     {
         return $this->hasMany(ContentPhotos::class);
     }
+    public function register()
+    {
+        return $this->hasMany(Register::class);
+    }
 
     public function getActivitylogOptions(): LogOptions
     {
