@@ -60,6 +60,7 @@ return array (
   'current-package' => 'Current Package',
   'current-password' => 'Current Password',
   'dashboard' => 'Dashboard',
+  'date' => 'Date',
   'date-of-purchase' => 'Date of Purchase',
   'deactive' => 'Deactive',
   'decline' => 'Decline',

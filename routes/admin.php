@@ -94,5 +94,5 @@ Route::fallback(function () {
 Route::group(['name' => 'auth'], function () {
     Route::get('/login', [App\Http\Controllers\Backend\AuthController::class, 'showLoginForm'])->name('login');
     Route::post('loginAdmin', [App\Http\Controllers\Backend\AuthController::class, 'login'])->name('loginPost');
-    Route::post('logout', [App\Http\Controllers\Backend\AuthController::class, 'logout'])->name('logout');
+    Route::post('logout', [App\Http\Controllers\Backend\AuthController::class, 'logout'])->name('backend.logout');
 });

@@ -60,6 +60,7 @@ return array (
   'current-package' => 'Cari Paket',
   'current-password' => 'Cari şifrə',
   'dashboard' => 'İdarə Paneli',
+  'date' => 'Tarix',
   'date-of-purchase' => 'Alınma tarixi',
   'deactive' => 'Passiv',
   'decline' => 'Ləğv et',

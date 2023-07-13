@@ -59,6 +59,7 @@ return array (
   'created' => 'Создано',
   'current-package' => 'Текущий пакет',
   'dashboard' => 'Панель управления',
+  'date' => 'Дата',
   'date-of-purchase' => 'Дата покупки',
   'deactive' => 'Неактивный',
   'decline' => 'Отклонить',

@@ -12,7 +12,7 @@ class AddTranslationKey extends Command
 
     protected $description = 'Add a new translation key to all language files';
 
-    public function handle()
+    public function handle(): void
     {
         $key = $this->argument('key');
         $langPath = resource_path('lang');

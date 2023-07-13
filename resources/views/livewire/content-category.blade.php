@@ -21,7 +21,7 @@
         <div class="mb-3">
             <label>@lang('backend.sub-categories')</label>
             <select class="form-control" name="subCategory">
-                <option>-- @lang('backend.sub-categories') --</option>
+                <option value="-1">-- @lang('backend.sub-categories') --</option>
                 @foreach($subs as $sub)
                     <option value="{{$sub->id}}">{{$sub->name}}</option>
                 @endforeach

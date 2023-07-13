@@ -17,12 +17,11 @@ class ContentController extends Controller
     public function index()
     {
         if (Content::where('status', 1)->exists()) {
-            return response()->json(['content' => Content::where('status', 1)->with('photos')->get()], 200);
+            return response()->json(['content' => Content::where('status', 1)->with('photos')->orderBy('created_at', 'desc')->get()], 200);
         } else {
             return response()->json(['content' => 'content-is-empty'], 404);
         }
     }
-
     public function register(Request $request, $id)
     {
         try {
