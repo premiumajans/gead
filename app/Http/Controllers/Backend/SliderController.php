@@ -38,6 +38,7 @@ class SliderController extends Controller
             }
             $slider = new Slider();
             $slider->photo = upload('sliders', $request->file('photo'));
+            $slider->link = $request->link;
             $slider->alt = $request->alt;
             $slider->order = $sliderOrder;
             $slider->save();
@@ -71,6 +72,7 @@ class SliderController extends Controller
                 foreach (active_langs() as $lang) {
                     $slider->translate($lang->code)->title = $request->title[$lang->code];
                 }
+                $slider->link = $request->link;
                 $slider->alt = $request->alt;
                 $slider->save();
             });

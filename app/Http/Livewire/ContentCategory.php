@@ -12,9 +12,22 @@ use mysql_xdevapi\XSession;
 
 class ContentCategory extends Component
 {
-    public $subs,$newAltCat,$countries,$continents = [];
-    public $update,$updatedCat,$updatedAltCat,$updatedSubCat,$selectedContinent,$selectedSub,$selectedCountry;
-    public function mount(): void
+    public $continents = [];
+    public $countries = [];
+
+    public $subs = [];
+
+    public $update;
+    public $updatedCat;
+    public $updatedAltCat;
+    public $updatedSubCat;
+    public $selectedContinent;
+    public $selectedSub;
+    public $selectedCountry;
+
+    public $newAltCat = [];
+
+    public function mount()
     {
         $this->continents = Category::all();
         if ($this->update != null) {
@@ -27,6 +40,7 @@ class ContentCategory extends Component
                 $this->subs = SubCategory::where('alt_category_id', $content->alt_id)->get();
             }
         }
+
     }
 
     public function render()
