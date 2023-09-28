@@ -10,12 +10,14 @@ return new class extends Migration {
         Schema::create('sliders', function (Blueprint $table) {
             $table->id();
             $table->text('photo');
+            $table->text('link')->nullable();
             $table->text('alt')->nullable();
             $table->boolean('status')->default(1);
             $table->integer('order');
             $table->timestamps();
         });
     }
+
     public function down()
     {
         Schema::dropIfExists('sliders');

@@ -32,12 +32,17 @@
                                             </div>
                                         @endforeach
                                             <div class="mb-3">
-                                                <label>@lang('backend.photo') <span class="text-danger">*</span></label>
-                                                <input type="file" name="photo" class="form-control" required="" id="validationCustom">
+                                                <label>@lang('backend.photo')</label>
+                                                <input type="file" name="photo" class="form-control" id="validationCustom">
                                                 @if(file_exists($slider->photo))
                                                     <img src="{{ asset($slider->photo) }}" class="form-control mt-2">
                                                 @endif
                                                 {!! validation_response('backend.photo') !!}
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>@lang('backend.link')</label>
+                                                <input type="url" name="link" class="form-control" id="validationCustom" value="{{ $slider->link }}">
+                                                {!! validation_response('backend.link') !!}
                                             </div>
                                             <div class="mb-3">
                                                 <label>@lang('backend.alt') <span class="text-danger">*</span></label>

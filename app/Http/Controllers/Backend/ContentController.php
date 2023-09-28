@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Helpers\CRUDHelper;
 use App\Models\ContentPhotos;
 use App\Models\ContentTranslation;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use App\Models\Content;
@@ -28,6 +29,7 @@ class ContentController extends Controller
 
     public function store(Request $request)
     {
+        //dd(Carbon::parse($request->time));
         check_permission('content create');
         try {
             $content = new Content();
@@ -38,6 +40,7 @@ class ContentController extends Controller
                 $content->photo = upload('content', $request->file('photo'));
             }
             $content->register = $request->register;
+            $content->created_at = Carbon::parse($request->time);
             $content->category_id = $request->category;
             $content->alt_id = $request->altCategory;
             $content->sub_id = $request->subCategory;
@@ -74,6 +77,7 @@ class ContentController extends Controller
 
     public function update(Request $request, string $id)
     {
+        //dd($request->all());
         check_permission('content edit');
         try {
             $content = Content::where('id', $id)->with('photos')->first();
@@ -81,6 +85,12 @@ class ContentController extends Controller
                 $content->category_id = $request->category;
                 $content->alt_id = $request->altCategory;
                 $content->sub_id = $request->subCategory;
+                $content->created_at = Carbon::parse($request->time);
+                if($request->has('register')){
+                    $content->register = 1;
+                }else{
+                    $content->register = 0;
+                }
                 if ($request->hasFile('pdf')) {
                     if (file_exists($content->pdf)) {
                         unlink(public_path($content->pdf));
@@ -125,7 +135,6 @@ class ContentController extends Controller
         check_permission('content delete');
         return CRUDHelper::remove_item('\App\Models\Content', $id);
     }
-
     public function deletePhoto($id)
     {
         check_permission('content delete');

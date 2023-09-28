@@ -9,7 +9,7 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <div class="col-12">
+                        0<div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                 <h4 class="mb-sm-0">@lang('backend.content'):</h4>
                                 <a href="{{ route('backend.content.create') }}" class="btn btn-primary mb-3"><i
@@ -17,7 +17,7 @@
                                 </a>
                             </div>
                         </div>
-                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
+                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive"
                                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                             <tr>

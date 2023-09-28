@@ -20,6 +20,7 @@ class WriterController extends Controller
     public function show($id)
     {
         if (Writer::where('status', 1)->where('id', $id)->exists()) {
+            Writer::where('status', 1)->where('id', $id)->increment('view');
             return response()->json(['writers' => Writer::where('status', 1)->where('id', $id)->first()],200);
         } else {
             return response()->json(['writers' => 'writer-is-not-founded'],404);

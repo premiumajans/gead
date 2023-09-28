@@ -33,6 +33,11 @@
                                            {!! validation_response('backend.photo') !!}
                                         </div>
                                         <div class="mb-3">
+                                            <label>@lang('backend.link')</label>
+                                            <input type="url" name="link" class="form-control" id="validationCustom" placeholder="https://premium.az">
+                                            {!! validation_response('backend.link') !!}
+                                        </div>
+                                        <div class="mb-3">
                                             <label>@lang('backend.alt') <span class="text-danger">*</span></label>
                                             <input type="text" name="alt" class="form-control" id="validationCustom"  placeholder="@lang('backend.alt')">
                                         </div>

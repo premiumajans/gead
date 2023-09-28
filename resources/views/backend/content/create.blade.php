@@ -43,17 +43,21 @@
                                                 </div>
                                             </div>
                                         @endforeach
+                                        <div class="mb-3">
+                                            <label>@lang('backend.date')</label>
+                                            <input name="time" type="datetime-local" class="form-control">
+                                        </div>
                                         @livewire('content-category')
-                                            <div class="form-check me-3 me-lg-5 mb-3">
-                                                <input class="form-check-input" type="checkbox"
-                                                       name="register"
-                                                       value="1"
-                                                       id="userManagementRead">
-                                                <label class="form-check-label"
-                                                       for="userManagementRead">
-                                                    @lang('backend.register')
-                                                </label>
-                                            </div>
+                                        <div class="form-check me-3 me-lg-5 mb-3">
+                                            <input class="form-check-input" type="checkbox"
+                                                   name="register"
+                                                   value="1"
+                                                   id="userManagementRead">
+                                            <label class="form-check-label"
+                                                   for="userManagementRead">
+                                                @lang('backend.register')
+                                            </label>
+                                        </div>
                                         <div class="mb-3">
                                             <label>PDF</label>
                                             <input name="pdf" type="file" class="form-control"

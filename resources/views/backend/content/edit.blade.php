@@ -45,7 +45,21 @@
                                                 </div>
                                             </div>
                                         @endforeach
+                                        <div class="mb-3">
+                                            <label>@lang('backend.date')</label>
+                                            <input name="time" type="datetime-local" value="{{ $content->created_at }}" class="form-control">
+                                        </div>
                                         @livewire('content-category',['update' => $content->id])
+                                        <div class="form-check me-3 me-lg-5 mb-3">
+                                            <input class="form-check-input" type="checkbox"
+                                                   name="register"
+                                                   value="yes"
+                                                   @if($content->register == 1) checked @endif>
+                                            <label class="form-check-label"
+                                                   for="userManagementRead">
+                                                @lang('backend.register')
+                                            </label>
+                                        </div>
                                         <div class="mb-3">
                                             <label>PDF</label>
                                             <input name="pdf" type="file" class="form-control"
@@ -71,7 +85,9 @@
                                                         <div style="position:relative;" class="wraper col-2 m-3">
                                                             <img src="{{ asset($photo->photo) }}"
                                                                  style="height: 200px; width: 200px; object-fit: cover;">
-                                                            <a style="position: absolute; right:5px; top:5px" type="button" class="btn btn-danger" href="{{ route('backend.contentPhotoDelete',$photo->id) }}">X</a>
+                                                            <a style="position: absolute; right:5px; top:5px"
+                                                               type="button" class="btn btn-danger"
+                                                               href="{{ route('backend.contentPhotoDelete',$photo->id) }}">X</a>
                                                         </div>
                                                     @endforeach
                                                 </div>
